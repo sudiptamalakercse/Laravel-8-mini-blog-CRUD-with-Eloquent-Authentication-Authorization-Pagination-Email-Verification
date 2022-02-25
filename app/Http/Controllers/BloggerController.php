@@ -96,7 +96,7 @@ class BloggerController extends Controller
     //      'body' => $request->body
     //  ]);
 
-    //  return redirect()->route('dashboard-blogger')->with('message', 'Your post is forwarded to Admin for Approval!!');  
+    //  return redirect()->back()->with('message', 'Your post is forwarded to Admin for Approval!!');  
     // }//end
 
 
@@ -115,9 +115,9 @@ class BloggerController extends Controller
 
     //     $post->title = $request->title;
     //     $post->body = $request->body;
-    //     $post->approved = false;
+    //     $post->update_approved = false;
     //     $post->save();
-    //     return redirect()->route('dashboard-blogger')->with('message', 'Your updated post is forwarded to Admin for Approval!!');  
+    //     return redirect()->back()->with('message', 'Your updated post is forwarded to Admin for Approval!!');  
     // }//end
 
 }

@@ -80,23 +80,27 @@ class AdminController extends Controller
     //  public function approve_or_disprove(Post $post)
     // {
     //     $admin_id=Auth::guard('admin')->user()->id;
-
+        
+    //     if($post->admin_id=null){
     //     $post->admin_id=$admin_id;
-
-    //    if($post->approved==true) 
+    //     }
+        
+    //    if(($post->post_approved==true || $post->post_approved==false) && $post->update_approved==false) 
     //    {
-    //      $post->approved = false;
-    //      $m='disapproved';
-    //    }
-    //    elseif($post->approved==false)
-    //    {
-    //      $post->approved = true;
+    //      $post->post_approved =true;
+    //      $post->update_approved =true;
     //      $m='approved';
+    //    }
+    //    elseif(($post->post_approved==true || $post->post_approved==false) && ($post->update_approved==true || $post->update_approved==false) )
+    //    {
+    //      $post->post_approved =false;
+    //      $post->update_approved =false;
+    //      $m='disapproved';
     //    }
 
     //     $post->save();
 
-    //    return redirect()->route('dashboard-admin')->with('message', 'The post is '.$m.' Successfully!!'); 
+    //    return redirect()->back()->with('message', 'The post is '.$m.' Successfully!!'); 
     // }
 
 

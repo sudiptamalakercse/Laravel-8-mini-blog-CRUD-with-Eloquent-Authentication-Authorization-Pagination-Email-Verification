@@ -57,7 +57,8 @@ Route::view('/setting-admin','admin.admin_setting')->name('setting-admin');
       
 // Route::get('/approve_or_disprove/{post}', [AdminController::class, 'approve_or_disprove'])
 //                 ->name('approve_or_disprove');
- });
+
+});
 
 
 
