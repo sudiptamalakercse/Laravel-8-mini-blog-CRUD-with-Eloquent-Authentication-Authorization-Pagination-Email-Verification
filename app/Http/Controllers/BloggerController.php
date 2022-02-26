@@ -96,7 +96,7 @@ class BloggerController extends Controller
     //      'body' => $request->body
     //  ]);
 
-    //  return redirect()->back()->with('message', 'Your post is forwarded to Admin for Approval!!');  
+    //  return redirect()->route('blogger.posts.pending')->with('message', 'Your post is forwarded to Admin for Approval!!');  
     // }//end
 
 
@@ -117,7 +117,106 @@ class BloggerController extends Controller
     //     $post->body = $request->body;
     //     $post->update_approved = false;
     //     $post->save();
-    //     return redirect()->back()->with('message', 'Your updated post is forwarded to Admin for Approval!!');  
+    //     return redirect()->route('blogger.posts.update_pending')->with('message', 'Your updated post is forwarded to Admin for Approval!!');  
     // }//end
+
+
+    private function blogger_auth(){
+       return Auth::guard('blogger')->user();
+    }//end
+        
+
+    // public function pending_post()
+    // {
+    //     $blogger=$this->blogger_auth();
+
+    //     $posts=$blogger
+    //            ->posts()
+    //            ->where('admin_id','==',null)
+    //            ->where('post_approved',0)
+    //            ->where('update_approved',0)
+    //            ->get();
+
+    //     return view('blogger.pending_post',['posts'=>$posts]);
+    // }//end
+
+
+    // public function update_pending_post()
+    // {
+    //     $blogger=$this->blogger_auth();
+
+    //     $posts=$blogger
+    //            ->posts()
+    //            ->where('admin_id','!=',null)
+    //            ->where('post_approved',1)
+    //            ->where('update_approved',0)
+    //            ->get();
+
+    //     return view('blogger.update_pending_post',['posts'=>$posts]);
+    // }//end
+
+
+    // public function approved_post()
+    // {
+    //     $blogger=$this->blogger_auth();
+
+    //     $posts=$blogger
+    //            ->posts()
+    //            ->where('admin_id','!=',null)
+    //            ->where('post_approved',1)
+    //            ->where('update_approved',1)
+    //            ->get();
+
+    //     return view('blogger.approved_post',['posts'=>$posts]);
+    // }//end
+
+
+    // public function disapproved_post()
+    // {
+    //     $blogger=$this->blogger_auth();
+
+    //     $posts=$blogger
+    //            ->posts()
+    //            ->where('admin_id','!=',null)
+    //            ->where('post_approved',0)
+    //            ->where('update_approved',0)
+    //            ->get();
+
+    //     return view('blogger.disapproved_post',['posts'=>$posts]);
+    // }//end
+
+
+    // public function approved_admin()
+    // {
+    //     $blogger=$this->blogger_auth();
+
+    //     $posts=$blogger
+    //            ->posts()
+    //            ->where('admin_id','!=',null)
+    //            ->where('post_approved',1)
+    //            ->where('update_approved',1)          
+    //            ->distinct()
+    //            ->get(['admin_id']); 
+
+    //     return view('blogger.approved_admin',['posts'=>$posts]);
+
+    // }//end
+
+    // public function disapproved_admin()
+    // {
+    //     $blogger=$this->blogger_auth();
+
+    //     $posts=$blogger
+    //            ->posts()
+    //            ->where('admin_id','!=',null)
+    //            ->where('post_approved',0)
+    //            ->where('update_approved',0)          
+    //            ->distinct()
+    //            ->get(['admin_id']); 
+
+    //     return view('blogger.disapproved_admin',['posts'=>$posts]);
+
+    // }//end
+
 
 }

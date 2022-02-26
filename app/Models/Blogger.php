@@ -46,8 +46,5 @@ class Blogger extends Authenticatable
     {
         return $this->hasMany(Post::class);
     }
-     public function admins()
-    {
-        return $this->hasManyThrough(Admin::class, Post::class);
-    }
+  
 }

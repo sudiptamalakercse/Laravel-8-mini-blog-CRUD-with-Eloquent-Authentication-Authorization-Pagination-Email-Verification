@@ -55,8 +55,33 @@ Route::get('/dashboard-admin', [AdminController::class, 'dashboard_admin'])
 
 Route::view('/setting-admin','admin.admin_setting')->name('setting-admin');
       
-// Route::get('/approve_or_disprove/{post}', [AdminController::class, 'approve_or_disprove'])
-//                 ->name('approve_or_disprove');
+// Route::get('/approve_or_disapprove/{post}', [AdminController::class, 'approve_or_disapprove'])
+//                 ->name('approve_or_disapprove');
+
+// Route::prefix('/admin/posts')->group(function () {
+    
+
+//   Route::get('/pending', [AdminController::class, 'pending_post'])
+//                 ->name('admin.posts.pending');
+
+//   Route::get('/update_pending', [AdminController::class, 'update_pending_post'])
+//                 ->name('admin.posts.update_pending');
+
+//   Route::get('/approved', [AdminController::class, 'approved_post'])
+//                 ->name('admin.posts.approved');
+
+//   Route::get('/disapproved', [AdminController::class, 'disapproved_post'])
+//                 ->name('admin.posts.disapproved');
+  
+// });
+
+
+// Route::get('/approved_blogger', [AdminController::class, 'approved_blogger'])
+//                 ->name('approved_blogger');
+
+// Route::get('/disapproved_blogger', [AdminController::class, 'disapproved_blogger'])
+//                 ->name('disapproved_blogger');
+
 
 });
 
@@ -70,19 +95,51 @@ Route::get('/dashboard-blogger', [BloggerController::class, 'dashboard_blogger']
 
 Route::view('/setting-blogger','blogger.blogger_setting')->name('setting-blogger');
 
+// Route::prefix('/posts')->group(function () {
 
-// Route::get('/posts/create', [BloggerController::class, 'create_post'])
+
+// Route::get('/create', [BloggerController::class, 'create_post'])
 //                 ->name('posts.create');
 
-// Route::post('/posts/create', [BloggerController::class, 'store_post']);
+// Route::post('/create', [BloggerController::class, 'store_post']);
 
 
-// Route::get('/posts/{post}', [BloggerController::class, 'edit_post'])
+// Route::get('/{post}', [BloggerController::class, 'edit_post'])
 //                 ->name('posts.edit');
 
-// Route::put('/posts/{post}', [BloggerController::class, 'update_post']);
+// Route::put('/{post}', [BloggerController::class, 'update_post']);
 
- });
+
+// });
+
+
+// Route::prefix('/blogger/posts')->group(function () {
+    
+
+//   Route::get('/pending', [BloggerController::class, 'pending_post'])
+//                 ->name('blogger.posts.pending');
+
+//   Route::get('/update_pending', [BloggerController::class, 'update_pending_post'])
+//                 ->name('blogger.posts.update_pending');
+
+//   Route::get('/approved', [BloggerController::class, 'approved_post'])
+//                 ->name('blogger.posts.approved');
+
+//   Route::get('/disapproved', [BloggerController::class, 'disapproved_post'])
+//                 ->name('blogger.posts.disapproved');
+  
+
+// });
+
+
+// Route::get('/approved_admin', [BloggerController::class, 'approved_admin'])
+//                 ->name('approved_admin');
+
+// Route::get('/disapproved_admin', [BloggerController::class, 'disapproved_admin'])
+//                 ->name('disapproved_admin');
+
+
+});
 
 
 
