@@ -121,9 +121,9 @@ class BloggerController extends Controller
     // }//end
 
 
-    private function blogger_auth(){
-       return Auth::guard('blogger')->user();
-    }//end
+    // private function blogger_auth(){
+    //    return Auth::guard('blogger')->user();
+    // }//end
         
 
     // public function pending_post()
@@ -201,6 +201,7 @@ class BloggerController extends Controller
     //     return view('blogger.approved_admin',['posts'=>$posts]);
 
     // }//end
+
 
     // public function disapproved_admin()
     // {
