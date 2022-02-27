@@ -58,6 +58,13 @@ Route::view('/setting-admin','admin.admin_setting')->name('setting-admin');
 // Route::get('/approve_or_disapprove/{post}', [AdminController::class, 'approve_or_disapprove'])
 //                 ->name('approve_or_disapprove');
 
+// Route::post('/approve_selected_post', [AdminController::class, 'approve_selected_post'])
+//                 ->name('approve_selected_post');
+
+// Route::post('/disapprove_selected_post', [AdminController::class, 'disapprove_selected_post'])
+//                 ->name('disapprove_selected_post');                
+
+
 // Route::prefix('/admin/posts')->group(function () {
     
 
@@ -143,11 +150,15 @@ Route::view('/setting-blogger','blogger.blogger_setting')->name('setting-blogger
 
 
 
+
 Route::post('/logout', [LogoutController::class, 'destroy'])
                 ->name('logout');
 
 // Route::get('/posts/delete/{post}', [DeleteController::class, 'delete_post'])
 //                 ->name('posts.delete');
+
+// Route::post('/posts/delete_selected_post', [DeleteController::class, 'delete_selected_post'])
+//                 ->name('posts.delete_selected_post');
  
                 
 Route::fallback(function () {

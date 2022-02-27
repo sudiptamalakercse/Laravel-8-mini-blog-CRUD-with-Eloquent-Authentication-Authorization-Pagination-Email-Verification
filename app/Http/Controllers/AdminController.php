@@ -104,6 +104,35 @@ class AdminController extends Controller
     //    return redirect()->back()->with('message', 'The post is '.$m.' Successfully!!');
 
     // }//end
+
+
+    // public function approve_selected_post(Request $request)
+    // {
+    //    $post_ids= $request->post_ids;
+       
+    //    Post::whereIn('id', $post_ids)
+    //          ->update([
+    //                    'post_approved' => 1,
+    //                    'update_approved' =>1,
+    //                    'post_pending' =>0
+    //                    ]);
+
+    //    return redirect()->back()->with('message', 'The selected Posts are Approved Successfully!!');  
+    // }
+
+    // public function disapprove_selected_post(Request $request)
+    // {
+    //    $post_ids= $request->post_ids;
+       
+    //    Post::whereIn('id', $post_ids)
+    //          ->update([
+    //                    'post_approved' => 0,
+    //                    'update_approved' =>0,
+    //                    'post_pending' =>0
+    //                    ]);
+
+    //    return redirect()->back()->with('message', 'The selected Posts are Disapproved Successfully!!');  
+    // }
        
     //     public function pending_post()
     //     {

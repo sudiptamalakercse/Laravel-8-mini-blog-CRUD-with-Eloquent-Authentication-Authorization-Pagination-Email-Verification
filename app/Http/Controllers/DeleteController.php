@@ -14,14 +14,21 @@ class DeleteController extends Controller
 
     // public function __construct()
     // {
-    //     $this->middleware(['guest:admin','guest:blogger'])->except('post_destroy');
+    //     $this->middleware(['guest:admin','guest:blogger'])->except(['delete_post','delete_selected_post']);
     // }//end
       
-    // public function post_destroy(Post $post)
+    // public function delete_post(Post $post)
     // {
     //     $post->delete();
 
     //     return redirect()->back()->with('message', 'The post is deleted!!');  
         
     // }//end
+
+    // public function delete_selected_post(Request $request)
+    // {
+    //    $post_ids= $request->post_ids;
+       
+    //    Post::destroy($post_ids);
+    // }
 }
