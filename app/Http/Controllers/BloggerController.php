@@ -77,6 +77,46 @@ class BloggerController extends Controller
         return view('blogger.blogger_dashboard');
     }
 
+    // private function get_assigned_task_admin_id(){
+
+    //     $admin_id=null;
+
+    //     $admin_count = Admin::count();
+
+    //     $task_assigned_admin_count = Admin::where('task_assigned',1)->count();
+
+    //     if( $task_assigned_admin_count<$admin_count){
+          
+    //        $admin = Admin::where('task_assigned',0)
+    //                        ->first();
+
+    //        $admin->task_assigned = 1;
+
+    //        $admin->save();
+
+    //        $admin_id = $admin->id;
+
+    //     }
+    //     elseif($task_assigned_admin_count==$admin_count){
+
+          
+    //        Admin::where('task_assigned',1)
+    //               ->update(['task_assigned' => 0]);
+
+    //        $admin = Admin::where('task_assigned',0)
+    //                        ->first();
+
+    //        $admin->task_assigned = 1;
+
+    //        $admin->save();
+
+    //        $admin_id = $admin->id;
+    //     }
+           
+    //        return $admin_id;
+
+    // }//end
+
     // public function create_post()
     // {
     //      return view('blogger.create_post');
@@ -89,11 +129,18 @@ class BloggerController extends Controller
     //         'body' => ['required', 'string', 'max:255']
     //     ]);
 
+    //     $admin_id=$this->get_assigned_task_admin_id();
+
+    //     if($admin_id==null){
+    //       return redirect()->back()->with('message', 'Not possible to create post because there is no admin to approve any post in this app!!');
+    //     }
+
     //     $blogger=$request->guard('blogger')->user();
- 
+
     //     $blogger->posts()->create([
     //     'title' => $request->title,
-    //      'body' => $request->body
+    //      'body' => $request->body,
+    //      'admin_id' => $admin_id
     //  ]);
 
     //  return redirect()->route('blogger.posts.pending')->with('message', 'Your post is forwarded to Admin for Approval!!');  
@@ -115,7 +162,8 @@ class BloggerController extends Controller
 
     //     $post->title = $request->title;
     //     $post->body = $request->body;
-    //     $post->update_approved = false;
+    //     $post->update_approved = 0;
+    //     $post->post_pending = 0;
     //     $post->save();
     //     return redirect()->route('blogger.posts.update_pending')->with('message', 'Your updated post is forwarded to Admin for Approval!!');  
     // }//end
@@ -132,9 +180,9 @@ class BloggerController extends Controller
 
     //     $posts=$blogger
     //            ->posts()
-    //            ->where('admin_id','==',null)
     //            ->where('post_approved',0)
     //            ->where('update_approved',0)
+    //            ->where('post_pending',1)
     //            ->get();
 
     //     return view('blogger.pending_post',['posts'=>$posts]);
@@ -147,9 +195,9 @@ class BloggerController extends Controller
 
     //     $posts=$blogger
     //            ->posts()
-    //            ->where('admin_id','!=',null)
     //            ->where('post_approved',1)
     //            ->where('update_approved',0)
+    //            ->where('post_pending',0)
     //            ->get();
 
     //     return view('blogger.update_pending_post',['posts'=>$posts]);
@@ -162,9 +210,9 @@ class BloggerController extends Controller
 
     //     $posts=$blogger
     //            ->posts()
-    //            ->where('admin_id','!=',null)
     //            ->where('post_approved',1)
     //            ->where('update_approved',1)
+    //            ->where('post_pending',0)
     //            ->get();
 
     //     return view('blogger.approved_post',['posts'=>$posts]);
@@ -177,9 +225,9 @@ class BloggerController extends Controller
 
     //     $posts=$blogger
     //            ->posts()
-    //            ->where('admin_id','!=',null)
     //            ->where('post_approved',0)
     //            ->where('update_approved',0)
+    //            ->where('post_pending',0)
     //            ->get();
 
     //     return view('blogger.disapproved_post',['posts'=>$posts]);
@@ -192,9 +240,9 @@ class BloggerController extends Controller
 
     //     $posts=$blogger
     //            ->posts()
-    //            ->where('admin_id','!=',null)
     //            ->where('post_approved',1)
-    //            ->where('update_approved',1)          
+    //            ->where('update_approved',1) 
+    //            ->where('post_pending',0)         
     //            ->distinct()
     //            ->get(['admin_id']); 
 
@@ -209,9 +257,9 @@ class BloggerController extends Controller
 
     //     $posts=$blogger
     //            ->posts()
-    //            ->where('admin_id','!=',null)
     //            ->where('post_approved',0)
-    //            ->where('update_approved',0)          
+    //            ->where('update_approved',0)
+    //            ->where('post_pending',0)          
     //            ->distinct()
     //            ->get(['admin_id']); 
 

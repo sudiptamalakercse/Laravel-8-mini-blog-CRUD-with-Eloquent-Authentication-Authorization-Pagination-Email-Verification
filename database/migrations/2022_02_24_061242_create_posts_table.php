@@ -19,6 +19,7 @@ class CreatePostsTable extends Migration
             $table->text('body');
             $table->boolean('post_approved')->default(false);
             $table->boolean('update_approved')->default(false);
+            $table->boolean('post_pending')->default(true);  
             $table->unsignedBigInteger('blogger_id');
             $table->foreign('blogger_id')->references('id')->on('bloggers');
             $table->unsignedBigInteger('admin_id');
