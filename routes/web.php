@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BloggerController;
 use App\Http\Controllers\LogoutController;
+use App\Http\Controllers\DeleteController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -102,29 +103,29 @@ Route::get('/dashboard-blogger', [BloggerController::class, 'dashboard_blogger']
 
 Route::view('/setting-blogger','blogger.blogger_setting')->name('setting-blogger');
 
-// Route::prefix('/posts')->group(function () {
+Route::prefix('/posts')->group(function () {
 
 
-// Route::get('/create', [BloggerController::class, 'create_post'])
-//                 ->name('posts.create');
+Route::get('/create', [BloggerController::class, 'create_post'])
+                ->name('posts.create');
 
-// Route::post('/create', [BloggerController::class, 'store_post']);
-
-
-// Route::get('/{post}', [BloggerController::class, 'edit_post'])
-//                 ->name('posts.edit');
-
-// Route::put('/{post}', [BloggerController::class, 'update_post']);
+Route::post('/create', [BloggerController::class, 'store_post']);
 
 
-// });
+Route::get('/{post}', [BloggerController::class, 'edit_post'])
+                ->name('posts.edit');
+
+Route::put('/{post}', [BloggerController::class, 'update_post']);
+
+
+});
 
 
 // Route::prefix('/blogger/posts')->group(function () {
     
 
-//   Route::get('/pending', [BloggerController::class, 'pending_post'])
-//                 ->name('blogger.posts.pending');
+  Route::get('/pending', [BloggerController::class, 'pending_post'])
+                ->name('blogger.posts.pending');
 
 //   Route::get('/update_pending', [BloggerController::class, 'update_pending_post'])
 //                 ->name('blogger.posts.update_pending');
@@ -154,8 +155,8 @@ Route::view('/setting-blogger','blogger.blogger_setting')->name('setting-blogger
 Route::post('/logout', [LogoutController::class, 'destroy'])
                 ->name('logout');
 
-// Route::get('/posts/delete/{post}', [DeleteController::class, 'delete_post'])
-//                 ->name('posts.delete');
+Route::get('/posts/delete/{post}', [DeleteController::class, 'delete_post'])
+                ->name('posts.delete');
 
 // Route::post('/posts/delete_selected_post', [DeleteController::class, 'delete_selected_post'])
 //                 ->name('posts.delete_selected_post');

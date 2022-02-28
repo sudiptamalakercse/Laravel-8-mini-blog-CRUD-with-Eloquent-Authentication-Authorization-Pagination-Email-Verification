@@ -24,6 +24,16 @@
    <li class="nav-item">
     <a class="nav-link" href="{{route('setting-blogger')}}">Blogger Setting</a>
   </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{{route('posts.create')}}">Create Post</a>
+  </li>
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Posts</a>
+    <div class="dropdown-menu">
+       <a class="nav-link" href="{{route('blogger.posts.pending')}}">Pending</a>
+    </div>
+  </li>
+
   @endif
 
   @if(!Auth::guard('admin')->check() && !Auth::guard('blogger')->check())

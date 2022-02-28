@@ -77,116 +77,132 @@ class BloggerController extends Controller
         return view('blogger.blogger_dashboard');
     }
 
-    // private function get_assigned_task_admin_id(){
+    private function get_assigned_task_admin_id(){
 
-    //     $admin_id=null;
+        $admin_id=null;
 
-    //     $admin_count = Admin::count();
+        $admin_count = Admin::count();
 
-    //     $task_assigned_admin_count = Admin::where('task_assigned',1)->count();
+        $task_assigned_admin_count = Admin::where('task_assigned',1)->count();
 
-    //     if( $task_assigned_admin_count<$admin_count){
+        if( $task_assigned_admin_count<$admin_count){
           
-    //        $admin = Admin::where('task_assigned',0)
-    //                        ->first();
+           $admin = Admin::where('task_assigned',0)
+                           ->first();
 
-    //        $admin->task_assigned = 1;
+           $admin->task_assigned = 1;
 
-    //        $admin->save();
+           $admin->save();
 
-    //        $admin_id = $admin->id;
+           $admin_id = $admin->id;
 
-    //     }
-    //     elseif($task_assigned_admin_count==$admin_count){
+        }
+        elseif($task_assigned_admin_count==$admin_count){
 
           
-    //        Admin::where('task_assigned',1)
-    //               ->update(['task_assigned' => 0]);
+           Admin::where('task_assigned',1)
+                  ->update(['task_assigned' => 0]);
 
-    //        $admin = Admin::where('task_assigned',0)
-    //                        ->first();
+           $admin = Admin::where('task_assigned',0)
+                           ->first();
 
-    //        $admin->task_assigned = 1;
+           $admin->task_assigned = 1;
 
-    //        $admin->save();
+           $admin->save();
 
-    //        $admin_id = $admin->id;
-    //     }
+           $admin_id = $admin->id;
+        }
            
-    //        return $admin_id;
+           return $admin_id;
 
-    // }//end
+    }//end
 
-    // public function create_post()
-    // {
-    //      return view('blogger.create_post');
-    // }//end
+    public function create_post()
+    {
+         return view('blogger.create_post');
+    }//end
 
-    // public function store_post(Request $request)
-    // {
-    //      $request->validate([
-    //         'title' => ['required', 'string', 'max:255'],
-    //         'body' => ['required', 'string', 'max:255']
-    //     ]);
+    public function store_post(Request $request)
+    {
+         $request->validate([
+            'title' => ['required', 'string', 'max:255'],
+            'body' => ['required', 'string', 'max:255']
+        ]);
+         
+        $admin_id=$this->get_assigned_task_admin_id();
 
-    //     $admin_id=$this->get_assigned_task_admin_id();
+        if($admin_id==null){
+          return redirect()->back()->with('message', 'Not possible to create post because there is no admin to approve any post in this app!!');
+        }
+ 
+        $blogger=Auth::guard('blogger')->user();
+ 
+        $blogger->posts()->create([
+        'title' => $request->title,
+         'body' => $request->body,
+         'admin_id' => $admin_id
+     ]);
 
-    //     if($admin_id==null){
-    //       return redirect()->back()->with('message', 'Not possible to create post because there is no admin to approve any post in this app!!');
-    //     }
-
-    //     $blogger=$request->guard('blogger')->user();
-
-    //     $blogger->posts()->create([
-    //     'title' => $request->title,
-    //      'body' => $request->body,
-    //      'admin_id' => $admin_id
-    //  ]);
-
-    //  return redirect()->route('blogger.posts.pending')->with('message', 'Your post is forwarded to Admin for Approval!!');  
-    // }//end
+     return redirect()->route('blogger.posts.pending')->with('message', 'Your post is forwarded to Admin for Approval!!');  
+    }//end
 
 
-    // public function edit_post(Post $post)
-    // {
-    //    return view('blogger.edit_post',['post' =>$post]);
-    // }//end
+    public function edit_post(Post $post)
+    {
+       return view('blogger.edit_post',['post' =>$post]);
+    }//end
 
     
-    // public function update_post(Request $request, Post $post)
-    // {
-    //         $request->validate([
-    //         'title' => ['required', 'string', 'max:255'],
-    //         'body' => ['required', 'string', 'max:255']
-    //     ]);
+    public function update_post(Request $request, Post $post)
+    {
+            $request->validate([
+            'title' => ['required', 'string', 'max:255'],
+            'body' => ['required', 'string', 'max:255']
+        ]);
 
-    //     $post->title = $request->title;
-    //     $post->body = $request->body;
-    //     $post->update_approved = 0;
-    //     $post->post_pending = 0;
-    //     $post->save();
-    //     return redirect()->route('blogger.posts.update_pending')->with('message', 'Your updated post is forwarded to Admin for Approval!!');  
-    // }//end
+        $post->title = $request->title;
+        $post->body = $request->body;
+        if($post->post_pending ==0)
+        {
+            $post->post_approved = 1;
+            $post->update_approved = 0;
+        }
+        elseif($post->post_pending ==1)
+        {
+            $post->post_approved = 0;
+            $post->update_approved = 0;
+        }
+        $post->save();
+        if($post->post_pending ==0)
+        {
+          return redirect()->route('blogger.posts.update_pending')->with('message', 'Your updated post is forwarded to Admin for Approval!!');
+        }
+        elseif($post->post_pending ==1)
+        {
+          return redirect()->route('blogger.posts.pending')->with('message', 'Your updated post is forwarded to Admin for Approval!!');
+        }
+
+    }//end
 
 
-    // private function blogger_auth(){
-    //    return Auth::guard('blogger')->user();
-    // }//end
+    private function blogger_auth(){
+       return Auth::guard('blogger')->user();
+    }//end
         
 
-    // public function pending_post()
-    // {
-    //     $blogger=$this->blogger_auth();
+    public function pending_post()
+    {
+        $blogger=$this->blogger_auth();
 
-    //     $posts=$blogger
-    //            ->posts()
-    //            ->where('post_approved',0)
-    //            ->where('update_approved',0)
-    //            ->where('post_pending',1)
-    //            ->get();
+        $posts=$blogger
+               ->posts()
+               ->where('post_approved',0)
+               ->where('update_approved',0)
+               ->where('post_pending',1)
+               ->get();
 
-    //     return view('blogger.pending_post',['posts'=>$posts]);
-    // }//end
+        return view('blogger.pending_post',['posts'=>$posts]);
+    }//end
 
 
     // public function update_pending_post()

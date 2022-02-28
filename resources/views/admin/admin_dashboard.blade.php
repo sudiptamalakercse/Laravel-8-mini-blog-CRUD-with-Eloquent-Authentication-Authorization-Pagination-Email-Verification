@@ -15,7 +15,6 @@
      @if (Auth::guard('admin')->check())
      <h3 class="mb-3 text-center">Welcome {{Auth::guard('admin')->user()->name}} (Admin) to Admin Dashboard!!</h3>
      @endif
-     @include('component.logout')
     </div>
   </div>
 </div>
