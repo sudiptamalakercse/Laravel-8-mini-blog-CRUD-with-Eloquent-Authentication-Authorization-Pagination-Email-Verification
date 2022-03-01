@@ -15,7 +15,6 @@
     </x-slot>
  
    <div class="container">
-   @include('component.nav')
   <div class="row">
     <div class="col-md-4 offset-md-4">
             <h3 class="mb-3 text-center">{{$heading}}</h3>

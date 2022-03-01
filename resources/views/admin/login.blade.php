@@ -6,7 +6,6 @@
     </x-slot>
  
 <div class="container">
-   @include('component.nav')
   <div class="row">        
     <div class="col-md-4 offset-md-4">
          <h3 class="mb-3 text-center">Log In As Admin</h3>
@@ -34,7 +33,7 @@
     <input type="checkbox" class="form-check-input" id="remember" name="remember">
     <label class="form-check-label" for="remember">Remember Me</label>
   </div>
-  <button type="submit" class="btn btn-primary">Log In</button>
+  <button type="submit" class="btn-primary btn-sm rounded-pill">Log In</button>
 </form>
     </div>
   </div>

@@ -1,5 +1,4 @@
- <div class="row">        
-    <div class="col">
+
 <ul class="nav nav-pills mt-1">
 
    @if(Auth::guard('admin')->check())
@@ -57,5 +56,3 @@
   @endif
 
 </ul>
-</div>
-</div>

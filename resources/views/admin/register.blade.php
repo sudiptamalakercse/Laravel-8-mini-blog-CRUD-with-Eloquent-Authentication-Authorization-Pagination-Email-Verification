@@ -6,7 +6,6 @@
     </x-slot>
  
 <div class="container">
-   @include('component.nav')
   <div class="row">
     <div class="col-md-4 offset-md-4">
             <h3 class="mb-3 text-center">Register As Admin</h3>
@@ -37,7 +36,7 @@
     <label for="exampleInputPassword1" class="form-label">Password</label>
     <input type="password" class="form-control" id="exampleInputPassword1"  name="password">
   </div>
-  <button type="submit" class="btn btn-primary">Register</button>
+  <button type="submit" class="btn-primary btn-sm rounded-pill">Register</button>
 </form>
     </div>
   </div>

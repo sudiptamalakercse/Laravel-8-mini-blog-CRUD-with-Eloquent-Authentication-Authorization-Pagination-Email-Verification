@@ -5,7 +5,23 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     </head>
     <body>
-        @include('component.logout')
+
+    <div class="row align-items-center">
+    <div class="col-md-1 "></div>
+    <div class="col-md-6"> @include('component.nav')</div>
+    <div class="col-md-3">
+     @if (Auth::guard('blogger')->check())
+    <span style="float:right;margin-right:1%;" class="fw-bolder fs-6 text-primary">Blogger ({{Auth::guard('blogger')->user()->name}})</span>
+    @elseif (Auth::guard('admin')->check())
+    <span style="float:right;margin-right:1%;" class="fw-bolder fs-6 text-primary">Admin ({{Auth::guard('admin')->user()->name}})</span>
+    @endif
+    </div>
+    <div class="col-md-1">
+     @include('component.logout')
+    </div> 
+    <div class="col-md-1"></div>
+    </div>
+
         {{ $slot }}
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
