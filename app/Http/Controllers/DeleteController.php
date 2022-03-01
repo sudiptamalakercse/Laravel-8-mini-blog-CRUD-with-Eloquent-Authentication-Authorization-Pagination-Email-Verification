@@ -25,10 +25,22 @@ class DeleteController extends Controller
         
     }//end
 
-    // public function delete_selected_post(Request $request)
-    // {
-    //    $post_ids= $request->post_ids;
+    public function delete_selected_post(Request $request)
+    {
+
+
+       $post_ids= $request->post_ids;
+
+      if(is_array($post_ids) && count($post_ids)>0){
+        
+        Post::destroy($post_ids);
+        return redirect()->back()->with('message', 'The Selected Posts are Deleted!!');
+    
+     }
+     else
+     {
+        return redirect()->back()->with('message', 'Please Select the Posts to Delete!!');
+     }
        
-    //    Post::destroy($post_ids);
-    // }
+    }//end
 }

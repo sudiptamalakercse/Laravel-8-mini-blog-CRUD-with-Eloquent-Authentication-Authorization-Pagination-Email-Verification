@@ -158,8 +158,8 @@ Route::post('/logout', [LogoutController::class, 'destroy'])
 Route::get('/posts/delete/{post}', [DeleteController::class, 'delete_post'])
                 ->name('posts.delete');
 
-// Route::post('/posts/delete_selected_post', [DeleteController::class, 'delete_selected_post'])
-//                 ->name('posts.delete_selected_post');
+Route::post('/posts/delete_selected_post', [DeleteController::class, 'delete_selected_post'])
+                ->name('posts.delete_selected_post');
  
                 
 Route::fallback(function () {

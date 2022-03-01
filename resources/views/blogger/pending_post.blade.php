@@ -1,8 +1,9 @@
 
-<x-pending_post_layout  
+<x-post_list  
+heading='Pending Posts'
 :errorsAny="$errors->any()" 
 :errorsAll="$errors->all()" 
-actionFor="blogger" 
+userType="blogger" 
 :posts="$posts" 
 action1Link='posts.edit'
 action1="Edit"

@@ -1,4 +1,4 @@
-<x-create_or_edit_post_layout 
+<x-create_or_edit_post
 title='Create Post'
 heading='Create A New Post'
 :errorsAny='$errors->any()' 
