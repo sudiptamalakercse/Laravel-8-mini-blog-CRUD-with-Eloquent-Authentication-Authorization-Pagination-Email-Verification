@@ -53,7 +53,8 @@
       <th scope="col" class="align-middle text-center">Post Id</th>
       <th scope="col" class="align-middle text-center">Title</th>
       <th scope="col" class="align-middle text-center">Body</th>
-      @if($userType=="blogger")<th scope="col" class="align-middle text-center">Admin Email</th>@endif
+      @if($userType=="blogger")<th scope="col" class="align-middle text-center">Admin Email</th>
+      @elseif($userType=="admin")<th scope="col" class="align-middle text-center">Blogger Email</th>@endif
       <th colspan="2" class="align-middle text-center">Actions</th>
     </tr>
   </thead>
@@ -66,7 +67,8 @@
       <th scope="posts" class="align-middle text-center">{{$post->id}}</th>
       <td class="align-middle text-center">{{$post->title}}</td>
       <td class="align-middle text-center">{{$post->body}}</td>
-      @if($userType=="blogger")<td class="align-middle text-center">{{$post->admin->email}}</td>@endif
+      @if($userType=="blogger")<td class="align-middle text-center">{{$post->admin->email}}</td>
+      @elseif($userType=="admin")<td class="align-middle text-center">{{$post->blogger->email}}</td>@endif
       <td class="align-middle text-center"><a class="btn-success btn-sm rounded-pill" href="{{route($action1Link, ['post' =>$post->id ])}}" style="text-decoration:none;" role="button">{{$action1}}</a></td>
       <td class="align-middle text-center"><a class="btn-warning btn-sm rounded-pill" href="{{route($action2Link, ['post' =>$post->id ])}}" style="text-decoration:none;" role="button">{{$action2}}</a></td>
     </tr>

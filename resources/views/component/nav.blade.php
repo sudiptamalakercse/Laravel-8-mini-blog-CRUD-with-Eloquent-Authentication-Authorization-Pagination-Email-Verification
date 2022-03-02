@@ -15,7 +15,9 @@
     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Posts</a>
     <div class="dropdown-menu">
        <a class="dropdown-item" href="{{route('admin.posts.pending')}}">Pending</a>
+       <a class="dropdown-item" href="{{route('admin.posts.update_pending')}}">Updated Pending</a>
        <a class="dropdown-item" href="{{route('admin.posts.approved')}}">Approved</a>
+       <a class="dropdown-item" href="{{route('admin.posts.disapproved')}}">Disapproved</a>
     </div>
   </li>
   @endif
@@ -37,6 +39,9 @@
     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Posts</a>
     <div class="dropdown-menu">
        <a class="dropdown-item" href="{{route('blogger.posts.pending')}}">Pending</a>
+       <a class="dropdown-item" href="{{route('blogger.posts.update_pending')}}">Updated Pending</a>
+       <a class="dropdown-item" href="{{route('blogger.posts.approved')}}">Approved</a>
+       <a class="dropdown-item" href="{{route('blogger.posts.disapproved')}}">Disapproved</a>
     </div>
   </li>
 

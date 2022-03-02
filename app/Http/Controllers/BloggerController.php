@@ -205,49 +205,49 @@ class BloggerController extends Controller
     }//end
 
 
-    // public function update_pending_post()
-    // {
-    //     $blogger=$this->blogger_auth();
+    public function update_pending_post()
+    {
+        $blogger=$this->blogger_auth();
 
-    //     $posts=$blogger
-    //            ->posts()
-    //            ->where('post_approved',1)
-    //            ->where('update_approved',0)
-    //            ->where('post_pending',0)
-    //            ->get();
+        $posts=$blogger
+               ->posts()
+               ->where('post_approved',1)
+               ->where('update_approved',0)
+               ->where('post_pending',0)
+               ->get();
 
-    //     return view('blogger.update_pending_post',['posts'=>$posts]);
-    // }//end
-
-
-    // public function approved_post()
-    // {
-    //     $blogger=$this->blogger_auth();
-
-    //     $posts=$blogger
-    //            ->posts()
-    //            ->where('post_approved',1)
-    //            ->where('update_approved',1)
-    //            ->where('post_pending',0)
-    //            ->get();
-
-    //     return view('blogger.approved_post',['posts'=>$posts]);
-    // }//end
+        return view('blogger.update_pending_post',['posts'=>$posts]);
+    }//end
 
 
-    // public function disapproved_post()
-    // {
-    //     $blogger=$this->blogger_auth();
+    public function approved_post()
+    {
+        $blogger=$this->blogger_auth();
 
-    //     $posts=$blogger
-    //            ->posts()
-    //            ->where('post_approved',0)
-    //            ->where('update_approved',0)
-    //            ->where('post_pending',0)
-    //            ->get();
+        $posts=$blogger
+               ->posts()
+               ->where('post_approved',1)
+               ->where('update_approved',1)
+               ->where('post_pending',0)
+               ->get();
 
-    //     return view('blogger.disapproved_post',['posts'=>$posts]);
-    // }//end
+        return view('blogger.approved_post',['posts'=>$posts]);
+    }//end
+
+
+    public function disapproved_post()
+    {
+        $blogger=$this->blogger_auth();
+
+        $posts=$blogger
+               ->posts()
+               ->where('post_approved',0)
+               ->where('update_approved',0)
+               ->where('post_pending',0)
+               ->get();
+
+        return view('blogger.disapproved_post',['posts'=>$posts]);
+    }//end
 
 
     // public function approved_admin()

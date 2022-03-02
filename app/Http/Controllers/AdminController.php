@@ -166,20 +166,20 @@ class AdminController extends Controller
         }//end
 
 
-    //    public function update_pending_post()
-    //    {
+       public function update_pending_post()
+       {
 
-    //     $admin=$this->admin_auth();
+        $admin=$this->admin_auth();
 
-    //     $posts=$admin
-    //            ->posts()
-    //            ->where('post_approved',1)
-    //            ->where('update_approved',0)
-    //            ->where('post_pending',0)
-    //            ->get();
+        $posts=$admin
+               ->posts()
+               ->where('post_approved',1)
+               ->where('update_approved',0)
+               ->where('post_pending',0)
+               ->get();
 
-    //     return view('admin.update_pending_post',['posts'=>$posts]);
-    //    }//end
+        return view('admin.update_pending_post',['posts'=>$posts]);
+       }//end
 
 
         public function approved_post()
@@ -198,20 +198,20 @@ class AdminController extends Controller
         }//end
 
 
-    //     public function disapproved_post()
-    //     {
+        public function disapproved_post()
+        {
 
-    //     $admin=$this->admin_auth();
+        $admin=$this->admin_auth();
 
-    //     $posts=$admin
-    //            ->posts()
-    //            ->where('post_approved',0)
-    //            ->where('update_approved',0)
-    //            ->where('post_pending',0)
-    //            ->get();
+        $posts=$admin
+               ->posts()
+               ->where('post_approved',0)
+               ->where('update_approved',0)
+               ->where('post_pending',0)
+               ->get();
 
-    //     return view('admin.disapproved_post',['posts'=>$posts]);
-    //     }//end
+        return view('admin.disapproved_post',['posts'=>$posts]);
+        }//end
 
 
     //     public function approved_blogger()

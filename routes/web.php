@@ -72,14 +72,14 @@ Route::prefix('/admin/posts')->group(function () {
   Route::get('/pending', [AdminController::class, 'pending_post'])
                 ->name('admin.posts.pending');
 
-  // Route::get('/update_pending', [AdminController::class, 'update_pending_post'])
-  //               ->name('admin.posts.update_pending');
+  Route::get('/update_pending', [AdminController::class, 'update_pending_post'])
+                ->name('admin.posts.update_pending');
 
   Route::get('/approved', [AdminController::class, 'approved_post'])
                 ->name('admin.posts.approved');
 
-  // Route::get('/disapproved', [AdminController::class, 'disapproved_post'])
-  //               ->name('admin.posts.disapproved');
+  Route::get('/disapproved', [AdminController::class, 'disapproved_post'])
+                ->name('admin.posts.disapproved');
   
 });
 
@@ -121,23 +121,23 @@ Route::put('/{post}', [BloggerController::class, 'update_post']);
 });
 
 
-// Route::prefix('/blogger/posts')->group(function () {
+Route::prefix('/blogger/posts')->group(function () {
     
 
   Route::get('/pending', [BloggerController::class, 'pending_post'])
                 ->name('blogger.posts.pending');
 
-//   Route::get('/update_pending', [BloggerController::class, 'update_pending_post'])
-//                 ->name('blogger.posts.update_pending');
+  Route::get('/update_pending', [BloggerController::class, 'update_pending_post'])
+                ->name('blogger.posts.update_pending');
 
-//   Route::get('/approved', [BloggerController::class, 'approved_post'])
-//                 ->name('blogger.posts.approved');
+  Route::get('/approved', [BloggerController::class, 'approved_post'])
+                ->name('blogger.posts.approved');
 
-//   Route::get('/disapproved', [BloggerController::class, 'disapproved_post'])
-//                 ->name('blogger.posts.disapproved');
+  Route::get('/disapproved', [BloggerController::class, 'disapproved_post'])
+                ->name('blogger.posts.disapproved');
   
 
-// });
+});
 
 
 // Route::get('/approved_admin', [BloggerController::class, 'approved_admin'])
