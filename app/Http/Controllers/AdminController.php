@@ -77,78 +77,93 @@ class AdminController extends Controller
         return view('admin.admin_dashboard');
     }
 
-    // private function admin_auth(){
-    //    return Auth::guard('admin')->user();
-    // }//end
+    private function admin_auth(){
+       return Auth::guard('admin')->user();
+    }//end
 
-    //  public function approve_or_disapprove(Post $post)
-    // {
+     public function approve_or_disapprove(Post $post)
+    {
   
-    //    if(($post->post_approved==1 || $post->post_approved==0) && $post->update_approved==0 && ($post->post_pending==0 || $post->post_pending==1))
-    //    {
-    //      $post->post_approved =1;
-    //      $post->update_approved =1;
-    //      $post->post_pending =0;
-    //      $m='approved';
-    //    }
-    //    elseif(($post->post_approved==1 || $post->post_approved==0) && ($post->update_approved==1 || $post->update_approved==0) && ($post->post_pending==0 || $post->post_pending==1))
-    //    {
-    //      $post->post_approved =0;
-    //      $post->update_approved =0;
-    //      $post->post_pending =0;
-    //      $m='disapproved';
-    //    }
+       if(($post->post_approved==1 || $post->post_approved==0) && $post->update_approved==0 && ($post->post_pending==0 || $post->post_pending==1))
+       {
+         $post->post_approved =1;
+         $post->update_approved =1;
+         $post->post_pending =0;
+         $m='approved';
+       }
+       elseif(($post->post_approved==1 || $post->post_approved==0) && ($post->update_approved==1 || $post->update_approved==0) && ($post->post_pending==0 || $post->post_pending==1))
+       {
+         $post->post_approved =0;
+         $post->update_approved =0;
+         $post->post_pending =0;
+         $m='disapproved';
+       }
 
-    //     $post->save();
+        $post->save();
 
-    //    return redirect()->back()->with('message', 'The post is '.$m.' Successfully!!');
+       return redirect()->back()->with('message', 'The post is '.$m.' Successfully!!');
 
-    // }//end
+    }//end
 
 
-    // public function approve_selected_post(Request $request)
-    // {
-    //    $post_ids= $request->post_ids;
+    public function approve_selected_post(Request $request)
+    {
+       $post_ids= $request->post_ids;
        
-    //    Post::whereIn('id', $post_ids)
-    //          ->update([
-    //                    'post_approved' => 1,
-    //                    'update_approved' =>1,
-    //                    'post_pending' =>0
-    //                    ]);
+       if(is_array($post_ids) && count($post_ids)>0){
 
-    //    return redirect()->back()->with('message', 'The selected Posts are Approved Successfully!!');  
-    // }
+       Post::whereIn('id', $post_ids)
+             ->update([
+                       'post_approved' => 1,
+                       'update_approved' =>1,
+                       'post_pending' =>0
+                       ]);
 
-    // public function disapprove_selected_post(Request $request)
-    // {
-    //    $post_ids= $request->post_ids;
+       return redirect()->back()->with('message', 'The selected Posts are Approved Successfully!!'); 
+       } 
+       else
+       {
+        return redirect()->back()->with('message', 'Please Select the Posts to Approve!!');
+       }
+    }
+
+    public function disapprove_selected_post(Request $request)
+    {
+       $post_ids= $request->post_ids;
+
+       if(is_array($post_ids) && count($post_ids)>0){
        
-    //    Post::whereIn('id', $post_ids)
-    //          ->update([
-    //                    'post_approved' => 0,
-    //                    'update_approved' =>0,
-    //                    'post_pending' =>0
-    //                    ]);
+       Post::whereIn('id', $post_ids)
+             ->update([
+                       'post_approved' => 0,
+                       'update_approved' =>0,
+                       'post_pending' =>0
+                       ]);
 
-    //    return redirect()->back()->with('message', 'The selected Posts are Disapproved Successfully!!');  
-    // }
+       return redirect()->back()->with('message', 'The selected Posts are Disapproved Successfully!!');  
+        }
+        else
+        {
+         return redirect()->back()->with('message', 'Please Select the Posts to Disapprove!!');
+        }
+
+    }
        
-    //     public function pending_post()
-    //     {
+        public function pending_post()
+        {
 
-    //     $admin=$this->admin_auth(); 
-    //     $admin_id=$admin->id;
-        
-    //     $posts=Post::
-    //              where('admin_id','==',$admin_id)
-    //            ->where('post_approved',0)
-    //            ->where('update_approved',0)
-    //            ->where('post_pending',1)
-    //            ->get();
+        $admin=$this->admin_auth(); 
+        $admin_id=$admin->id;
+       
+        $posts=Post::
+                 where('admin_id',$admin_id)
+               ->where('post_approved',0)
+               ->where('update_approved',0)
+               ->where('post_pending',1)
+               ->get();
 
-    //     return view('admin.pending_post',['posts'=>$posts]);
-    //     }//end
+        return view('admin.pending_post',['posts'=>$posts]);
+        }//end
 
 
     //    public function update_pending_post()
@@ -167,20 +182,20 @@ class AdminController extends Controller
     //    }//end
 
 
-    //     public function approved_post()
-    //     {
+        public function approved_post()
+        {
 
-    //     $admin=$this->admin_auth();
+        $admin=$this->admin_auth();
 
-    //     $posts=$admin
-    //            ->posts()
-    //            ->where('post_approved',1)
-    //            ->where('update_approved',1)
-    //            ->where('post_pending',0)
-    //            ->get();
+        $posts=$admin
+               ->posts()
+               ->where('post_approved',1)
+               ->where('update_approved',1)
+               ->where('post_pending',0)
+               ->get();
 
-    //     return view('admin.approved_post',['posts'=>$posts]);
-    //     }//end
+        return view('admin.approved_post',['posts'=>$posts]);
+        }//end
 
 
     //     public function disapproved_post()

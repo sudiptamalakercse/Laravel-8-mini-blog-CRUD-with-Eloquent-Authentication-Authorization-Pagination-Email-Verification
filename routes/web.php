@@ -56,32 +56,32 @@ Route::get('/dashboard-admin', [AdminController::class, 'dashboard_admin'])
 
 Route::view('/setting-admin','admin.admin_setting')->name('setting-admin');
       
-// Route::get('/approve_or_disapprove/{post}', [AdminController::class, 'approve_or_disapprove'])
-//                 ->name('approve_or_disapprove');
+Route::get('/approve_or_disapprove/{post}', [AdminController::class, 'approve_or_disapprove'])
+                ->name('approve_or_disapprove');
 
-// Route::post('/approve_selected_post', [AdminController::class, 'approve_selected_post'])
-//                 ->name('approve_selected_post');
+Route::post('/approve_selected_post', [AdminController::class, 'approve_selected_post'])
+                ->name('approve_selected_post');
 
-// Route::post('/disapprove_selected_post', [AdminController::class, 'disapprove_selected_post'])
-//                 ->name('disapprove_selected_post');                
+Route::post('/disapprove_selected_post', [AdminController::class, 'disapprove_selected_post'])
+                ->name('disapprove_selected_post');                
 
 
-// Route::prefix('/admin/posts')->group(function () {
+Route::prefix('/admin/posts')->group(function () {
     
 
-//   Route::get('/pending', [AdminController::class, 'pending_post'])
-//                 ->name('admin.posts.pending');
+  Route::get('/pending', [AdminController::class, 'pending_post'])
+                ->name('admin.posts.pending');
 
-//   Route::get('/update_pending', [AdminController::class, 'update_pending_post'])
-//                 ->name('admin.posts.update_pending');
+  // Route::get('/update_pending', [AdminController::class, 'update_pending_post'])
+  //               ->name('admin.posts.update_pending');
 
-//   Route::get('/approved', [AdminController::class, 'approved_post'])
-//                 ->name('admin.posts.approved');
+  Route::get('/approved', [AdminController::class, 'approved_post'])
+                ->name('admin.posts.approved');
 
-//   Route::get('/disapproved', [AdminController::class, 'disapproved_post'])
-//                 ->name('admin.posts.disapproved');
+  // Route::get('/disapproved', [AdminController::class, 'disapproved_post'])
+  //               ->name('admin.posts.disapproved');
   
-// });
+});
 
 
 // Route::get('/approved_blogger', [AdminController::class, 'approved_blogger'])

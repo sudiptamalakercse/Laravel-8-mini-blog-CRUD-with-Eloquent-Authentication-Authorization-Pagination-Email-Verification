@@ -1,5 +1,5 @@
 
-<ul class="nav nav-pills mt-1">
+<ul class="nav mt-1">
 
    @if(Auth::guard('admin')->check())
    <li class="nav-item">
@@ -10,6 +10,13 @@
   </li>
    <li class="nav-item">
     <a class="nav-link" href="{{route('setting-admin')}}">Admin Setting</a>
+  </li>
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Posts</a>
+    <div class="dropdown-menu">
+       <a class="dropdown-item" href="{{route('admin.posts.pending')}}">Pending</a>
+       <a class="dropdown-item" href="{{route('admin.posts.approved')}}">Approved</a>
+    </div>
   </li>
   @endif
 
@@ -29,7 +36,7 @@
   <li class="nav-item dropdown">
     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Posts</a>
     <div class="dropdown-menu">
-       <a class="nav-link" href="{{route('blogger.posts.pending')}}">Pending</a>
+       <a class="dropdown-item" href="{{route('blogger.posts.pending')}}">Pending</a>
     </div>
   </li>
 
