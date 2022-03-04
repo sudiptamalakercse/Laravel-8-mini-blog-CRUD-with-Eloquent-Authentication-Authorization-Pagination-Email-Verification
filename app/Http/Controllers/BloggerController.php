@@ -75,7 +75,9 @@ class BloggerController extends Controller
 
      public function dashboard_blogger()
     {
-        return view('blogger.blogger_dashboard');
+        $view= User::dashboard('blogger');
+        
+        return $view;
     }
 
     private function get_assigned_task_admin_id(){
@@ -191,7 +193,7 @@ class BloggerController extends Controller
     }//end
         
 
-    public function pending_post()
+    public function pending_post($count=false)
     {
         $blogger=$this->blogger_auth();
 
@@ -202,11 +204,16 @@ class BloggerController extends Controller
                ->where('post_pending',1)
                ->get();
 
+        if($count==true)
+        {
+            return  count($posts);
+        }
+
         return view('blogger.pending_post',['posts'=>$posts]);
     }//end
 
 
-    public function update_pending_post()
+    public function update_pending_post($count=false)
     {
         $blogger=$this->blogger_auth();
 
@@ -217,11 +224,16 @@ class BloggerController extends Controller
                ->where('post_pending',0)
                ->get();
 
+        if($count==true)
+        {
+            return  count($posts);
+        }
+
         return view('blogger.update_pending_post',['posts'=>$posts]);
     }//end
 
 
-    public function approved_post()
+    public function approved_post($count=false)
     {
         $blogger=$this->blogger_auth();
 
@@ -232,11 +244,16 @@ class BloggerController extends Controller
                ->where('post_pending',0)
                ->get();
 
+        if($count==true)
+        {
+            return  count($posts);
+        }
+
         return view('blogger.approved_post',['posts'=>$posts]);
     }//end
 
 
-    public function disapproved_post()
+    public function disapproved_post($count=false)
     {
         $blogger=$this->blogger_auth();
 
@@ -247,29 +264,34 @@ class BloggerController extends Controller
                ->where('post_pending',0)
                ->get();
 
+        if($count==true)
+        {
+            return  count($posts);
+        }
+
         return view('blogger.disapproved_post',['posts'=>$posts]);
     }//end
 
 
-    public function approved_admin()
+    public function approved_admin($count=false)
     {
-      return User::pending_updatePending_approved_disapproved_user_list('blogger',1,1,0);
+      return User::pending_updatePending_approved_disapproved_user_list('blogger',1,1,0,$count);
     }//end
 
 
-    public function disapproved_admin()
+    public function disapproved_admin($count=false)
     {
-      return User::pending_updatePending_approved_disapproved_user_list('blogger',0,0,0);
+      return User::pending_updatePending_approved_disapproved_user_list('blogger',0,0,0,$count);
     }//end
 
-    public function pending_admin()
+    public function pending_admin($count=false)
     {
-      return User::pending_updatePending_approved_disapproved_user_list('blogger',0,0,1);
+      return User::pending_updatePending_approved_disapproved_user_list('blogger',0,0,1,$count);
     }//end
 
-    public function update_pending_admin()
+    public function update_pending_admin($count=false)
     {
-      return User::pending_updatePending_approved_disapproved_user_list('blogger',1,0,0);
+      return User::pending_updatePending_approved_disapproved_user_list('blogger',1,0,0,$count);
     }//end
 
 

@@ -75,7 +75,11 @@ class AdminController extends Controller
 
      public function dashboard_admin()
     {
-        return view('admin.admin_dashboard');
+
+     $view= User::dashboard('admin');
+
+     return $view;
+    
     }
 
     private function admin_auth(){
@@ -150,7 +154,7 @@ class AdminController extends Controller
 
     }
        
-        public function pending_post()
+        public function pending_post($count=false)
         {
 
         $admin=$this->admin_auth(); 
@@ -163,11 +167,16 @@ class AdminController extends Controller
                ->where('post_pending',1)
                ->get();
 
+        if($count==true)
+        {
+            return  count($posts);
+        }
+
         return view('admin.pending_post',['posts'=>$posts]);
         }//end
 
 
-       public function update_pending_post()
+       public function update_pending_post($count=false)
        {
 
         $admin=$this->admin_auth();
@@ -179,11 +188,16 @@ class AdminController extends Controller
                ->where('post_pending',0)
                ->get();
 
+        if($count==true)
+        {
+            return  count($posts);
+        }
+
         return view('admin.update_pending_post',['posts'=>$posts]);
        }//end
 
 
-        public function approved_post()
+        public function approved_post($count=false)
         {
 
         $admin=$this->admin_auth();
@@ -195,11 +209,16 @@ class AdminController extends Controller
                ->where('post_pending',0)
                ->get();
 
+          if($count==true)
+        {
+            return  count($posts);
+        }
+                     
         return view('admin.approved_post',['posts'=>$posts]);
         }//end
 
 
-        public function disapproved_post()
+        public function disapproved_post($count=false)
         {
 
         $admin=$this->admin_auth();
@@ -211,36 +230,41 @@ class AdminController extends Controller
                ->where('post_pending',0)
                ->get();
 
+        if($count==true)
+        {
+            return  count($posts);
+        }
+        
         return view('admin.disapproved_post',['posts'=>$posts]);
         }//end
 
 
-        public function approved_blogger()
+        public function approved_blogger($count=false)
         {
             
-        return User::pending_updatePending_approved_disapproved_user_list('admin',1,1,0);
+        return User::pending_updatePending_approved_disapproved_user_list('admin',1,1,0,$count);
 
         }//end
 
 
-        public function disapproved_blogger()
+        public function disapproved_blogger($count=false)
         {
 
-        return User::pending_updatePending_approved_disapproved_user_list('admin',0,0,0);
+        return User::pending_updatePending_approved_disapproved_user_list('admin',0,0,0,$count);
          
         }//end
 
-        public function pending_blogger()
+        public function pending_blogger($count=false)
         {
 
-        return User::pending_updatePending_approved_disapproved_user_list('admin',0,0,1);
+        return User::pending_updatePending_approved_disapproved_user_list('admin',0,0,1,$count);
          
         }//end
 
-        public function update_pending_blogger()
+        public function update_pending_blogger($count=false)
         {
 
-        return User::pending_updatePending_approved_disapproved_user_list('admin',1,0,0);
+        return User::pending_updatePending_approved_disapproved_user_list('admin',1,0,0,$count);
          
         }//end
 

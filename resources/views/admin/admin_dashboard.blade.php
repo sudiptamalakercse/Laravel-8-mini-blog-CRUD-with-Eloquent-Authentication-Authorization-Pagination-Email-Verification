@@ -13,6 +13,14 @@
      @endif
      @if (Auth::guard('admin')->check())
      <h3 class="mb-3 text-center">Welcome {{Auth::guard('admin')->user()->name}} (Admin) to Admin Dashboard!!</h3>
+     {{$count_pending_post}}
+     {{$count_update_pending_post}}
+     {{$count_approved_post}}
+     {{$count_disapproved_post}}
+     {{$count_pending_blogger}}
+     {{$count_update_pending_blogger}}
+     {{$count_approved_blogger}}
+     {{$count_disapproved_blogger}}
      @endif
     </div>
   </div>

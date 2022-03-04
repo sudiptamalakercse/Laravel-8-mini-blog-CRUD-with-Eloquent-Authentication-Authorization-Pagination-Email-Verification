@@ -14,6 +14,14 @@
      @endif
      @if (Auth::guard('blogger')->check())
      <h3 class="mb-3 text-center">Welcome {{Auth::guard('blogger')->user()->name}} (Blogger) to Blogger Dashboard!!</h3>
+      {{$count_pending_post}}
+     {{$count_update_pending_post}}
+     {{$count_approved_post}}
+     {{$count_disapproved_post}}
+     {{$count_pending_admin}}
+     {{$count_update_pending_admin}}
+     {{$count_approved_admin}}
+     {{$count_disapproved_admin}}
      @endif
     </div>
   </div>
