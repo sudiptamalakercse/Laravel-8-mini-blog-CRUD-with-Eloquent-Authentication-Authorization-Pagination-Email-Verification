@@ -10,6 +10,7 @@ use Illuminate\Validation\Rules;
 use App\Models\Blogger;
 use App\Models\Admin;
 use App\Models\Post;
+use App\CustomClass\User;
 
 
 class AdminController extends Controller
@@ -214,40 +215,35 @@ class AdminController extends Controller
         }//end
 
 
-    //     public function approved_blogger()
-    //     {
+        public function approved_blogger()
+        {
             
-    //     $admin=$this->admin_auth();
+        return User::pending_updatePending_approved_disapproved_user_list('admin',1,1,0);
 
-    //     $posts=$admin
-    //            ->posts()
-    //            ->where('post_approved',1)
-    //            ->where('update_approved',1)
-    //            ->where('post_pending',0)          
-    //            ->distinct()
-    //            ->get(['blogger_id']);
-
-    //     return view('admin.approved_blogger',['posts'=>$posts]);
-
-    //     }//end
+        }//end
 
 
-    //     public function disapproved_blogger()
-    //     {
+        public function disapproved_blogger()
+        {
 
-    //     $admin=$this->admin_auth();
+        return User::pending_updatePending_approved_disapproved_user_list('admin',0,0,0);
+         
+        }//end
 
-    //     $posts=$admin
-    //            ->posts()
-    //            ->where('post_approved',0)
-    //            ->where('update_approved',0)   
-    //            ->where('post_pending',0)       
-    //            ->distinct()
-    //            ->get(['blogger_id']); 
+        public function pending_blogger()
+        {
 
-    //     return view('admin.disapproved_blogger',['posts'=>$posts]);
+        return User::pending_updatePending_approved_disapproved_user_list('admin',0,0,1);
+         
+        }//end
 
-    //     }//end
+        public function update_pending_blogger()
+        {
+
+        return User::pending_updatePending_approved_disapproved_user_list('admin',1,0,0);
+         
+        }//end
+
 
    
 

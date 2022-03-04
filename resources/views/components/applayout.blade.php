@@ -11,10 +11,12 @@
     <div class="col-md-6"> @include('component.nav')</div>
     <div class="col-md-3">
      @if (Auth::guard('blogger')->check())
-    <span style="float:right;margin-right:1%;" class="fw-bolder fs-6 text-primary">Blogger ({{Auth::guard('blogger')->user()->name}})</span>
-    @elseif (Auth::guard('admin')->check())
-    <span style="float:right;margin-right:1%;" class="fw-bolder fs-6 text-primary">Admin ({{Auth::guard('admin')->user()->name}})</span>
-    @endif
+     @php $user_=Auth::guard('blogger')->user();@endphp
+    <span style="float:right;margin-right:1%;" class="fw-bolder fs-6 text-primary">Blogger ({{$user_->name.'-'.$user_->id}})</span>
+     @elseif (Auth::guard('admin')->check())
+     @php $user_=Auth::guard('admin')->user();@endphp
+     <span style="float:right;margin-right:1%;" class="fw-bolder fs-6 text-primary">Admin ({{$user_->name.'-'.$user_->id}})</span>
+     @endif
     </div>
     <div class="col-md-1">
      @include('component.logout')

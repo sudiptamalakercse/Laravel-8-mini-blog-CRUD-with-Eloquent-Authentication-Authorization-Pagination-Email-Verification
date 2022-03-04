@@ -1,4 +1,5 @@
-<x-post_list  
+<x-post_list
+title='Approved Posts'   
 heading='Approved Posts'
 :errorsAny="$errors->any()" 
 :errorsAll="$errors->all()" 

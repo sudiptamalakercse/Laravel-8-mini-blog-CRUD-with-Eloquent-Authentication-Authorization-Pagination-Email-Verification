@@ -84,11 +84,17 @@ Route::prefix('/admin/posts')->group(function () {
 });
 
 
-// Route::get('/approved_blogger', [AdminController::class, 'approved_blogger'])
-//                 ->name('approved_blogger');
+Route::get('/approved_blogger', [AdminController::class, 'approved_blogger'])
+                ->name('approved_blogger');
 
-// Route::get('/disapproved_blogger', [AdminController::class, 'disapproved_blogger'])
-//                 ->name('disapproved_blogger');
+Route::get('/disapproved_blogger', [AdminController::class, 'disapproved_blogger'])
+                ->name('disapproved_blogger');
+
+Route::get('/pending_blogger', [AdminController::class, 'pending_blogger'])
+                ->name('pending_blogger');
+
+Route::get('/update_pending_blogger', [AdminController::class, 'update_pending_blogger'])
+                ->name('update_pending_blogger');
 
 
 });
@@ -140,11 +146,17 @@ Route::prefix('/blogger/posts')->group(function () {
 });
 
 
-// Route::get('/approved_admin', [BloggerController::class, 'approved_admin'])
-//                 ->name('approved_admin');
+Route::get('/approved_admin', [BloggerController::class, 'approved_admin'])
+                ->name('approved_admin');
 
-// Route::get('/disapproved_admin', [BloggerController::class, 'disapproved_admin'])
-//                 ->name('disapproved_admin');
+Route::get('/disapproved_admin', [BloggerController::class, 'disapproved_admin'])
+                ->name('disapproved_admin');
+
+Route::get('/pending_admin', [BloggerController::class, 'pending_admin'])
+                ->name('pending_admin');
+
+Route::get('/update_pending_admin', [BloggerController::class, 'update_pending_admin'])
+                ->name('update_pending_admin');
 
 
 });

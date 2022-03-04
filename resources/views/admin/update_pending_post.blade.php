@@ -1,4 +1,5 @@
-<x-post_list  
+<x-post_list
+title='Updated Pending Posts'  
 heading='Updated Pending Posts'
 :errorsAny="$errors->any()" 
 :errorsAll="$errors->all()" 
