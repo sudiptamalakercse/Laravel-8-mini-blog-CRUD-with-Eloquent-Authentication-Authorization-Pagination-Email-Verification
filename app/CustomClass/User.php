@@ -72,6 +72,12 @@ class User
 
 
    public static function dashboard($user_type){
+
+       function array_push_assoc($array, $key, $value){
+       $array[$key] = $value;
+       return $array;
+       }
+
         if($user_type=='admin')
         {
            $obj=new AdminController();
@@ -87,28 +93,57 @@ class User
         $disapproved_user='disapproved_'.$val;
         $pending_user='pending_'.$val;
         $update_pending_user='update_pending_'.$val;
+       
+        Global $units;
+        $units=[];
+
+        function units_func($title,$count,$link){
+
+        global $units;
+
+        $unit=[]; 
+
+        $unit=array_push_assoc($unit, 'title',$title);
+        $unit=array_push_assoc($unit, 'count',$count);
+        $unit=array_push_assoc($unit, 'link',$link);
+        
+        array_push($units,$unit); 
+
+        };
 
         $count_pending_post=$obj->pending_post(true);
-        $count_update_pending_post=$obj->update_pending_post(true);
-        $count_approved_post=$obj->approved_post(true);
-        $count_disapproved_post=$obj->disapproved_post(true);
-        $count_approved_user=$obj->$approved_user(true);
-        $count_disapproved_user=$obj->$disapproved_user(true);
-        $count_pending_user=$obj->$pending_user(true);
-        $count_update_pending_user=$obj->$update_pending_user(true);
+        $link=route($user_type.'.posts.pending');
+        units_func('Pending Posts',$count_pending_post,$link);
 
-       return view($user_type.'.'.$user_type.'_dashboard',
-      [
-         'count_pending_post'=>$count_pending_post,
-         'count_update_pending_post'=>$count_update_pending_post,
-         'count_approved_post'=>$count_approved_post,
-         'count_disapproved_post'=>$count_disapproved_post,
-         'count_approved_'.$val=>$count_approved_user,
-         'count_disapproved_'.$val=>$count_disapproved_user,
-         'count_pending_'.$val=>$count_pending_user,
-         'count_update_pending_'.$val=>$count_update_pending_user
-      ]
-      );
+        $count_update_pending_post=$obj->update_pending_post(true);
+        $link=route($user_type.'.posts.update_pending');
+        units_func('Updated Pending Posts',$count_update_pending_post,$link);
+   
+        $count_approved_post=$obj->approved_post(true);
+        $link=route($user_type.'.posts.approved');
+        units_func('Approved Posts',$count_approved_post,$link);
+
+        $count_disapproved_post=$obj->disapproved_post(true);
+        $link=route($user_type.'.posts.disapproved');
+        units_func('Disapproved Posts',$count_disapproved_post,$link);
+
+        $count_pending_user=$obj->$pending_user(true);
+        $link=route('pending_'.$val);
+        units_func('Pending '.ucfirst($val).'s',$count_pending_user,$link);
+
+        $count_update_pending_user=$obj->$update_pending_user(true);
+        $link=route('update_pending_'.$val);
+        units_func('Updated Pending '.ucfirst($val).'s',$count_update_pending_user,$link);
+   
+        $count_approved_user=$obj->$approved_user(true);
+        $link=route('approved_'.$val);
+        units_func('Approved '.ucfirst($val).'s',$count_approved_user,$link);
+
+        $count_disapproved_user=$obj->$disapproved_user(true);
+        $link=route('disapproved_'.$val);
+        units_func('Disapproved '.ucfirst($val).'s',$count_disapproved_user,$link);
+ 
+        return view($user_type.'.'.$user_type.'_dashboard', ['units'=>$units]);
 
         }
 

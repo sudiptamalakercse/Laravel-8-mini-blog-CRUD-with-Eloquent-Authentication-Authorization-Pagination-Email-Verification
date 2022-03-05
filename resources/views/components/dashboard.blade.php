@@ -2,46 +2,30 @@
 @props(
 ['title' => 'Some Title',
 'heading',
- 'userTypeInfo',
- 'posts'
+'units'
  ]
  )
 
 <x-applayout>
-
     <x-slot name="title">
       {{ $title }}
     </x-slot>
- 
-   <div class="container">
-  <div class="row">
-<div class="col">
-<h3 class="mb-3 text-center mt-2 text-primary">{{$heading}}({{count($posts)}})</h3>
-<table class="table">
-  <thead class="thead-dark">
-    <tr>
-      @if(count($posts)>1)
-      <th scope="col" class="align-middle text-center">Select All<br><input type ="checkbox" id='cp'/></th>
-      @endif
-      <th scope="col" class="align-middle text-center">{{ucfirst($userTypeInfo)}} Id</th>
-      <th scope="col" class="align-middle text-center">{{ucfirst($userTypeInfo)}} Name</th>
-      <th scope="col" class="align-middle text-center">{{ucfirst($userTypeInfo)}} Email</th>
-    </tr>
-  </thead>
-  <tbody>
-    @foreach ($posts as $post)
-     <tr>
-      @if(count($posts)>1)
-      <td class="align-middle text-center"><input type ="checkbox" name="post_ids[]" class='c'/></td>
-      @endif
-      <th scope="posts" class="align-middle text-center">{{$post->$userTypeInfo->id}}</th>
-      <td class="align-middle text-center">{{$post->$userTypeInfo->name}}</td>
-      <td class="align-middle text-center">{{$post->$userTypeInfo->email}}</td>
-    </tr>
-    @endforeach 
-  </tbody>
-</table>
+   
+<div class="container">
+<h3 class="mb-3 text-center mt-2 text-primary">{{$heading}}</h3>
+<div class="row mt-5">
+
+@foreach ($units as $unit)
+<div class="col-md-3 col-sm-6">
+  <a href="{{$unit['link']}}" class="text-decoration-none">
+   <div class="border border-2 rounded border-primary p-2 mb-2 text-center" style="margin-left:1.2%;height:90%;">
+      <h6 class="fs-4 text-primary">{{$unit['title']}}</h6>
+      <h6 class="fs-4 text-primary">{{$unit['count']}}</h6>
+    </div>
+  </a>
 </div>
+@endforeach
+
 </div>
 </div> 
 

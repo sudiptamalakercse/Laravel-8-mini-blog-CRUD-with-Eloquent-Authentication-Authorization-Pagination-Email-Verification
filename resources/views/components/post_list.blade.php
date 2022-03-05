@@ -14,13 +14,6 @@
  )
 
 <x-applayout>
-  <style>
-
-.selected_post{
-  background-color: coral;
-  color: white;
-}
-  </style>
   
     <x-slot name="title">
       {{ $title }}
