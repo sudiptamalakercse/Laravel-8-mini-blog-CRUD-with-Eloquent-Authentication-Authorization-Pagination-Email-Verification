@@ -7,7 +7,7 @@
     <div class="container">
   <div class="row">        
     <div class="col-md-4 offset-md-4">
-         <h3 class="mb-3 text-center">Log In As Blogger</h3>
+         <h3 class="mb-3 text-center text-primary">Log In As Blogger</h3>
 @if ($errors->any())
     <div class="alert alert-danger" class="mt-5">
         <ul>

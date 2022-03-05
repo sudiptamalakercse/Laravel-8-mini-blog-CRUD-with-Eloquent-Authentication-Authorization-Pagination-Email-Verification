@@ -5,6 +5,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BloggerController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\DeleteController;
+use App\Http\Controllers\HomeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,10 +18,9 @@ use App\Http\Controllers\DeleteController;
 */
 Route::middleware(['guest:admin','guest:blogger','disable_back_btn'])->group(function () {
 
-    
-Route::get('/', function () {
-    return view('home');
-})->name('home');
+
+Route::get('/', [HomeController::class, 'home'])
+                ->name('home');
 
 Route::get('/register-admin', [AdminController::class, 'create'])
                 ->name('register-admin');

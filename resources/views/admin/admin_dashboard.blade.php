@@ -12,7 +12,7 @@
    <div class="alert alert-info" class="mb-3">{{ Session::get('message') }}</div>
      @endif
      @if (Auth::guard('admin')->check())
-     <h3 class="mb-3 text-center">Welcome {{Auth::guard('admin')->user()->name}} (Admin) to Admin Dashboard!!</h3>
+     <h3 class="mb-3 text-center text-primary">Welcome {{Auth::guard('admin')->user()->name}} (Admin) to Admin Dashboard!!</h3>
      {{$count_pending_post}}
      {{$count_update_pending_post}}
      {{$count_approved_post}}

@@ -29,7 +29,7 @@
    <div class="container">
   <div class="row">
     <div class="col">
-            <h3 class="mb-3 text-center mt-2">{{$heading}}({{count($posts)}})</h3>
+            <h3 class="mb-3 text-center mt-2 text-primary">{{$heading}}({{count($posts)}})</h3>
         @if (Session::has('message'))
    <div class="alert alert-info" class="mb-3">{{ Session::get('message') }}</div>
 @endif

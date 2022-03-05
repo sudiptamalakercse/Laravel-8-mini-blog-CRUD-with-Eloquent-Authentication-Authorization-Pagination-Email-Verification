@@ -207,6 +207,7 @@ class AdminController extends Controller
                ->where('post_approved',1)
                ->where('update_approved',1)
                ->where('post_pending',0)
+               ->orderBy('updated_at', 'desc')
                ->get();
 
           if($count==true)
@@ -228,6 +229,7 @@ class AdminController extends Controller
                ->where('post_approved',0)
                ->where('update_approved',0)
                ->where('post_pending',0)
+               ->orderBy('updated_at', 'desc')
                ->get();
 
         if($count==true)
