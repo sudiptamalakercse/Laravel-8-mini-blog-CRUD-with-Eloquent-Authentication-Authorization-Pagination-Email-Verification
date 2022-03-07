@@ -16,10 +16,18 @@ class LogoutController extends Controller
 
     public function destroy(Request $request)
     {
+        $user_type=null;
+
         if(Auth::guard('admin')->check()){
+            
+           $user_type='admin';
+
            Auth::guard('admin')->logout();
         }
         elseif(Auth::guard('blogger')->check()){
+
+            $user_type='blogger';
+
             Auth::guard('blogger')->logout();
         }
 
@@ -27,6 +35,6 @@ class LogoutController extends Controller
 
         $request->session()->regenerateToken();
         
-        return redirect()->route('home');
+        return redirect()->route('login-'.$user_type);
     }
 }

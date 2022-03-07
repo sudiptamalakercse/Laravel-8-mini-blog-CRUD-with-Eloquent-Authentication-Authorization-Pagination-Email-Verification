@@ -17,6 +17,7 @@
   <div class="row">
 <div class="col">
 <h3 class="mb-3 text-center mt-2 text-primary">{{$heading}}({{count($posts)}})</h3>
+<div class="table-responsive-md">
 <table class="table">
   <thead class="thead-dark">
     <tr>
@@ -43,6 +44,7 @@
 </table>
 </div>
 </div>
+</div>
 </div> 
 
 <script>
@@ -53,6 +55,7 @@ let checkp= document.getElementById('cp');
 
 let checkboxes=document.getElementsByClassName("c");
 
+if(checkp!=null){
 checkp.addEventListener("click", function(e){
 
  if(checkp.checked==true)
@@ -80,7 +83,7 @@ checkp.addEventListener("click", function(e){
  }
 
 });
-
+}
    for(let i=0;i<checkboxes.length;i++)
    {
 

@@ -37,6 +37,7 @@
 @endif
 <form action="" method="post" id="myform" data-user-type="{{$userType}}">
  @csrf
+ <div class="table-responsive-md">
 <table class="table">
   <thead class="thead-dark">
     <tr>
@@ -77,6 +78,7 @@
     @endforeach 
   </tbody>
 </table>
+</div>
 <p class="text-center">
 
 @if(Auth::guard('admin')->user() && count($posts)>1)
@@ -102,6 +104,7 @@ let checkp= document.getElementById('cp');
 
 let checkboxes=document.getElementsByClassName("c");
 
+if(checkp!=null){
 checkp.addEventListener("click", function(e){
 
  if(checkp.checked==true)
@@ -129,7 +132,7 @@ checkp.addEventListener("click", function(e){
  }
 
 });
-
+}
    for(let i=0;i<checkboxes.length;i++)
    {
 
@@ -155,8 +158,11 @@ let form=document.getElementById("myform");
 let form_action=null;
 
 //Delete Selected
+let delete_selected=document.getElementById("delete_selected");
 
-document.getElementById("delete_selected").addEventListener("click", function(e){
+if(delete_selected!=null){
+
+delete_selected.addEventListener("click", function(e){
 
  e.preventDefault();
    
@@ -171,9 +177,14 @@ form.submit();
 
 });
 
+}
 //Approve or Disapprove Selected
 
-document.getElementById("approve_or_disapprove_selected").addEventListener("click", function(e){
+let approve_or_disapprove_selected=document.getElementById("approve_or_disapprove_selected");
+
+if(approve_or_disapprove_selected!=null){
+
+approve_or_disapprove_selected.addEventListener("click", function(e){
 
  e.preventDefault();
    
@@ -197,6 +208,8 @@ form.submit();
 }
 
 });
+
+}
 </script>
 
 </x-applayout>

@@ -1,6 +1,5 @@
 @if(Auth::guard('admin')->user() || Auth::guard('blogger')->user())
-<form action="{{route('logout')}}" method="post">
+<form action="{{route('logout')}}" method="post" id='log_out_form'>
 @csrf
-    <button type="submit" class="btn-sm btn-danger rounded-pill" style="float: right;">Log Out</button>
 </form>
 @endif
