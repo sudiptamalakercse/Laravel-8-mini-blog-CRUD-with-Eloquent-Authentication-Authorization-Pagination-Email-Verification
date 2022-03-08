@@ -16,7 +16,7 @@
            $ago=$updated->diffForHumans($now);
            $ago=str_replace("before", "ago", $ago);
          @endphp
-         <div class="border border-2 rounded border-primary p-2 mb-2" style="margin-left:1.2%;">
+         <div class="border rounded border-primary p-2 mb-2" style="margin-left:1.2%;border-width:2px !important;">
          <span class="fs-4 text-primary"> {{$post->blogger->name}}</span><br>
           {{$ago}}<br>
           <p class="mt-1">
