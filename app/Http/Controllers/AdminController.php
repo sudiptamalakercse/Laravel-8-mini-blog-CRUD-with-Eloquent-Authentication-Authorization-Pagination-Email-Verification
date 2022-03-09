@@ -167,6 +167,8 @@ class AdminController extends Controller
                ->where('post_pending',1)
                ->get();
 
+        $this->authorize('posts_show_for_admin',[Post::class,$posts]);
+
         if($count==true)
         {
             return  count($posts);
@@ -187,6 +189,8 @@ class AdminController extends Controller
                ->where('update_approved',0)
                ->where('post_pending',0)
                ->get();
+        
+        $this->authorize('posts_show_for_admin',[Post::class,$posts]);
 
         if($count==true)
         {
@@ -210,6 +214,8 @@ class AdminController extends Controller
                ->orderBy('updated_at', 'desc')
                ->get();
 
+         $this->authorize('posts_show_for_admin',[Post::class,$posts]);
+
           if($count==true)
         {
             return  count($posts);
@@ -231,6 +237,8 @@ class AdminController extends Controller
                ->where('post_pending',0)
                ->orderBy('updated_at', 'desc')
                ->get();
+               
+         $this->authorize('posts_show_for_admin',[Post::class,$posts]);
 
         if($count==true)
         {

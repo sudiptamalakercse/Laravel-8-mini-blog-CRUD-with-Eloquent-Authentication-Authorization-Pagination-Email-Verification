@@ -34,7 +34,25 @@ class User
          {
           $distinct_user='admin';
          } 
-          
+
+       $posts=$user
+               ->posts()
+               ->where('post_approved',$post_approved)
+               ->where('update_approved',$update_approved)   
+               ->where('post_pending',$post_pending)  
+               ->get();
+
+    if($user_type=='admin'){
+        if ($user->cannot('bloggers_show_for_admin', [Post::class,$posts])) {
+            abort(403);
+         }
+       }
+       elseif($user_type=='blogger'){
+         if ($user->cannot('admins_show_for_blogger', [Post::class,$posts])) {
+            abort(403);
+         }
+       }
+
         $posts=$user
                ->posts()
                ->where('post_approved',$post_approved)
@@ -43,6 +61,11 @@ class User
                ->distinct()
                ->get([$distinct_user.'_id']); 
 
+            // dd( $posts);
+      //   $admin=self::admin_auth();
+      //   $this->authorize('posts_show_for_admin',[Post::class,$posts]);
+
+   
         if($post_approved==0 && $update_approved==0 && $post_pending==1 )
            {
               $blade_file='pending_'.$distinct_user;
