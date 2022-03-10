@@ -6,7 +6,6 @@ use App\Models\Post;
 use App\Models\Admin;
 use App\Models\Blogger;
 
-use Illuminate\Support\Collection;
 
 use Illuminate\Auth\Access\HandlesAuthorization;
 
@@ -14,64 +13,24 @@ class PostPolicy
 {
     use HandlesAuthorization;
 
-public function posts_show_for_admin(Admin $admin,Collection $posts)
-    {
-        if(count($posts)>0){
-
-        foreach ($posts as $post) {
-
-            return $admin->id==$post->admin_id;
-        }
-
-        }   
-        else {
-            return true;
-        }  
+public function posts_show_for_admin(Admin $admin,Post $post)
+    {  
+       return $admin->id==$post->admin_id;          
     }
 
-public function posts_show_for_blogger(Blogger $blogger,Collection $posts)
-    {
-        if(count($posts)>0){
-
-        foreach ($posts as $post) {
-
-            return $blogger->id==$post->blogger_id;
-        }
-
-        }   
-        else {
-            return true;
-        }  
+public function posts_show_for_blogger(Blogger $blogger,Post $post)
+    {      
+      return $blogger->id==$post->blogger_id;
     }
 
-public function bloggers_show_for_admin(Admin $admin,Collection $posts)
+public function bloggers_show_for_admin(Admin $admin,Post $post)
+   {
+     return $admin->id==$post->admin_id; 
+   }
+
+public function admins_show_for_blogger(Blogger $blogger,Post $post)
     {
-        if(count($posts)>0){
-
-        foreach ($posts as $post) {
-
-            return $admin->id==$post->admin_id;
-        }
-
-        }   
-        else {
-            return true;
-        }  
-    }
-
-public function admins_show_for_blogger(Blogger $blogger,Collection $posts)
-    {
-        if(count($posts)>0){
-
-        foreach ($posts as $post) {
-
-            return $blogger->id==$post->blogger_id;
-        }
-
-        }   
-        else {
-            return true;
-        }  
+         return $blogger->id==$post->blogger_id;
     }
 
     /**

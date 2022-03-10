@@ -205,7 +205,9 @@ class BloggerController extends Controller
                ->orderBy('updated_at', 'desc')
                ->get();
 
-       $this->authorize('posts_show_for_blogger',[Post::class,$posts]);
+        foreach ($posts as $post) {
+           $this->authorize('posts_show_for_blogger',$post);
+        }
      
         if($count==true)
         {
@@ -228,7 +230,9 @@ class BloggerController extends Controller
                ->orderBy('updated_at', 'desc')
                ->get();
 
-        $this->authorize('posts_show_for_blogger',[Post::class,$posts]);
+        foreach ($posts as $post) {
+           $this->authorize('posts_show_for_blogger',$post);
+        }
 
         if($count==true)
         {
@@ -251,7 +255,9 @@ class BloggerController extends Controller
                ->orderBy('updated_at', 'desc')
                ->get();
 
-        $this->authorize('posts_show_for_blogger',[Post::class,$posts]);
+        foreach ($posts as $post) {
+           $this->authorize('posts_show_for_blogger',$post);
+        }
 
         if($count==true)
         {
@@ -274,7 +280,9 @@ class BloggerController extends Controller
                ->orderBy('updated_at', 'desc')
                ->get();
 
-    $this->authorize('posts_show_for_blogger',[Post::class,$posts]);
+        foreach ($posts as $post) {
+           $this->authorize('posts_show_for_blogger',$post);
+        }
 
         if($count==true)
         {

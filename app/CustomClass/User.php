@@ -42,16 +42,28 @@ class User
                ->where('post_pending',$post_pending)  
                ->get();
 
+
+   foreach ($posts as $post) {
+
+   
     if($user_type=='admin'){
-        if ($user->cannot('bloggers_show_for_admin', [Post::class,$posts])) {
+      
+       if ($user->cannot('bloggers_show_for_admin', $post)) {
             abort(403);
          }
+        
        }
+        
+       
        elseif($user_type=='blogger'){
-         if ($user->cannot('admins_show_for_blogger', [Post::class,$posts])) {
+       
+         if ($user->cannot('admins_show_for_blogger', $post)) {
             abort(403);
          }
+
        }
+
+      }
 
         $posts=$user
                ->posts()
@@ -60,10 +72,6 @@ class User
                ->where('post_pending',$post_pending)       
                ->distinct()
                ->get([$distinct_user.'_id']); 
-
-            // dd( $posts);
-      //   $admin=self::admin_auth();
-      //   $this->authorize('posts_show_for_admin',[Post::class,$posts]);
 
    
         if($post_approved==0 && $update_approved==0 && $post_pending==1 )
