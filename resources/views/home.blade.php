@@ -25,6 +25,15 @@
           </p>
           </div>
         @endforeach
+        <div class="mt-3 d-flex justify-content-center">
+          <span class="d-none d-sm-inline">{{$posts->onEachSide(4)->links()}}</span>
+        </div>
+        <div class="d-flex flex-wrap justify-content-center d-sm-none">
+        <a class="btn btn-primary btn-sm mt-1 px-4 @if($posts->currentPage()==1) disabled @endif" href="{{$posts->url(1)}}">First</a>
+        <a class="btn btn-primary btn-sm ml-1 mt-1 px-2 @if($posts->currentPage()==1) disabled @endif" href="{{$posts->previousPageUrl()}}">Privious</a>
+        <a class="btn btn-primary btn-sm ml-1 mt-1 px-4 @if($posts->currentPage()==$posts->lastPage()) disabled @endif" href="{{$posts->nextPageUrl()}}">Next</a>
+        <a class="btn btn-primary btn-sm ml-1 mt-1 px-4 @if($posts->currentPage()==$posts->lastPage()) disabled @endif" href="{{$posts->url($posts->lastPage())}}">Last</a>
+       </div>
     </div>
   </div>
 </div>  
