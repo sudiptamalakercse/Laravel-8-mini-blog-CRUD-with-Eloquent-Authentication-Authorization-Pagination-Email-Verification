@@ -54,7 +54,7 @@ Route::middleware(['auth:admin','disable_back_btn'])->group(function () {
 Route::get('/dashboard-admin', [AdminController::class, 'dashboard_admin'])
                 ->name('dashboard-admin');
 
-Route::view('/setting-admin','admin.admin_setting')->name('setting-admin');
+Route::get('/setting-admin',[AdminController::class, 'admin_setting'])->name('setting-admin');
       
 Route::get('/approve_or_disapprove/{post}', [AdminController::class, 'approve_or_disapprove'])
                 ->name('approve_or_disapprove');
@@ -106,8 +106,8 @@ Route::middleware(['auth:blogger','disable_back_btn'])->group(function () {
 
 Route::get('/dashboard-blogger', [BloggerController::class, 'dashboard_blogger'])
                 ->name('dashboard-blogger');
-
-Route::view('/setting-blogger','blogger.blogger_setting')->name('setting-blogger');
+                
+Route::get('/setting-blogger',[BloggerController::class, 'blogger_setting'])->name('setting-blogger');
 
 Route::prefix('/posts')->group(function () {
 
@@ -162,6 +162,7 @@ Route::get('/update_pending_admin', [BloggerController::class, 'update_pending_a
 });
 
 
+Route::middleware('operations_for_admin_and_blogger')->group(function () {
 
 
 Route::post('/logout', [LogoutController::class, 'destroy'])
@@ -172,6 +173,9 @@ Route::get('/posts/delete/{post}', [DeleteController::class, 'delete_post'])
 
 Route::post('/posts/delete_selected_post', [DeleteController::class, 'delete_selected_post'])
                 ->name('posts.delete_selected_post');
+
+
+});
  
                 
 Route::fallback(function () {

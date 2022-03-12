@@ -122,11 +122,14 @@ class BloggerController extends Controller
 
     public function create_post()
     {
+         $this->authorize('view_any_for_blogger',Post::class);
          return view('blogger.create_post');
     }//end
 
     public function store_post(Request $request)
     {
+         $this->authorize('create_post_by_blogger',Post::class);
+
          $request->validate([
             'title' => ['required', 'string', 'max:255'],
             'body' => ['required', 'string', 'max:255']
@@ -152,12 +155,17 @@ class BloggerController extends Controller
 
     public function edit_post(Post $post)
     {
+        $this->authorize('update_by_blogger', $post);
+
        return view('blogger.edit_post',['post' =>$post]);
     }//end
 
     
     public function update_post(Request $request, Post $post)
     {
+
+      $this->authorize('update_by_blogger', $post);
+
             $request->validate([
             'title' => ['required', 'string', 'max:255'],
             'body' => ['required', 'string', 'max:255']
@@ -312,6 +320,12 @@ class BloggerController extends Controller
     public function update_pending_admin($count=false)
     {
       return User::pending_updatePending_approved_disapproved_user_list('blogger',1,0,0,$count);
+    }//end
+
+    public function blogger_setting(){
+       
+    $this->authorize('view_any_for_blogger',Post::class);
+    return view('blogger.blogger_setting');
     }//end
 
 

@@ -88,7 +88,8 @@ class AdminController extends Controller
 
      public function approve_or_disapprove(Post $post)
     {
-  
+       $this->authorize('update_by_admin', $post);
+
        if(($post->post_approved==1 || $post->post_approved==0) && $post->update_approved==0 && ($post->post_pending==0 || $post->post_pending==1))
        {
          $post->post_approved =1;
@@ -103,7 +104,7 @@ class AdminController extends Controller
          $post->post_pending =0;
          $m='disapproved';
        }
-
+       
         $post->save();
 
        return redirect()->back()->with('message', 'The post is '.$m.' Successfully!!');
@@ -114,7 +115,15 @@ class AdminController extends Controller
     public function approve_selected_post(Request $request)
     {
        $post_ids= $request->post_ids;
-       
+
+       foreach ($post_ids as $post_id) {
+
+        $post=Post::find($post_id);
+
+        $this->authorize('selected_post_approve_or_disapprove_by_admin', $post);
+
+       }
+
        if(is_array($post_ids) && count($post_ids)>0){
 
        Post::whereIn('id', $post_ids)
@@ -135,6 +144,14 @@ class AdminController extends Controller
     public function disapprove_selected_post(Request $request)
     {
        $post_ids= $request->post_ids;
+
+       foreach ($post_ids as $post_id) {
+
+        $post=Post::find($post_id);
+
+        $this->authorize('selected_post_approve_or_disapprove_by_admin', $post);
+        
+       }
 
        if(is_array($post_ids) && count($post_ids)>0){
        
@@ -286,6 +303,11 @@ class AdminController extends Controller
 
         return User::pending_updatePending_approved_disapproved_user_list('admin',1,0,0,$count);
          
+        }//end
+        
+        public function admin_setting(){
+            $this->authorize('view_any_for_admin',Post::class);
+            return view('admin.admin_setting');
         }//end
 
 
