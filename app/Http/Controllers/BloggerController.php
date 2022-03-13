@@ -211,7 +211,7 @@ class BloggerController extends Controller
                ->where('update_approved',0)
                ->where('post_pending',1)
                ->orderBy('updated_at', 'desc')
-               ->get();
+               ->paginate(10); 
 
         foreach ($posts as $post) {
            $this->authorize('posts_show_for_blogger',$post);
@@ -219,7 +219,7 @@ class BloggerController extends Controller
      
         if($count==true)
         {
-            return  count($posts);
+            return $posts->total();
         }
 
         return view('blogger.pending_post',['posts'=>$posts]);
@@ -236,7 +236,7 @@ class BloggerController extends Controller
                ->where('update_approved',0)
                ->where('post_pending',0)
                ->orderBy('updated_at', 'desc')
-               ->get();
+               ->paginate(10);
 
         foreach ($posts as $post) {
            $this->authorize('posts_show_for_blogger',$post);
@@ -244,7 +244,7 @@ class BloggerController extends Controller
 
         if($count==true)
         {
-            return  count($posts);
+            return  $posts->total();
         }
 
         return view('blogger.update_pending_post',['posts'=>$posts]);
@@ -261,7 +261,7 @@ class BloggerController extends Controller
                ->where('update_approved',1)
                ->where('post_pending',0)
                ->orderBy('updated_at', 'desc')
-               ->get();
+               ->paginate(10);
 
         foreach ($posts as $post) {
            $this->authorize('posts_show_for_blogger',$post);
@@ -269,7 +269,7 @@ class BloggerController extends Controller
 
         if($count==true)
         {
-            return  count($posts);
+            return  $posts->total();
         }
 
         return view('blogger.approved_post',['posts'=>$posts]);
@@ -286,7 +286,7 @@ class BloggerController extends Controller
                ->where('update_approved',0)
                ->where('post_pending',0)
                ->orderBy('updated_at', 'desc')
-               ->get();
+               ->paginate(10);
 
         foreach ($posts as $post) {
            $this->authorize('posts_show_for_blogger',$post);
@@ -294,7 +294,7 @@ class BloggerController extends Controller
 
         if($count==true)
         {
-            return  count($posts);
+            return  $posts->total();
         }
 
         return view('blogger.disapproved_post',['posts'=>$posts]);

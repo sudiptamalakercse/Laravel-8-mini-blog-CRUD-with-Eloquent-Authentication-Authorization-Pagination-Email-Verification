@@ -182,7 +182,7 @@ class AdminController extends Controller
                ->where('post_approved',0)
                ->where('update_approved',0)
                ->where('post_pending',1)
-               ->get();
+               ->paginate(10);              
         
         foreach ($posts as $post){
          $this->authorize('posts_show_for_admin',$post);
@@ -192,7 +192,7 @@ class AdminController extends Controller
 
         if($count==true)
         {
-            return  count($posts);
+            return  $posts->total();
         }
 
         return view('admin.pending_post',['posts'=>$posts]);
@@ -209,7 +209,7 @@ class AdminController extends Controller
                ->where('post_approved',1)
                ->where('update_approved',0)
                ->where('post_pending',0)
-               ->get();
+               ->paginate(10); 
 
         foreach ($posts as $post){
          $this->authorize('posts_show_for_admin',$post);
@@ -217,7 +217,7 @@ class AdminController extends Controller
 
         if($count==true)
         {
-            return  count($posts);
+            return $posts->total();
         }
 
         return view('admin.update_pending_post',['posts'=>$posts]);
@@ -235,7 +235,7 @@ class AdminController extends Controller
                ->where('update_approved',1)
                ->where('post_pending',0)
                ->orderBy('updated_at', 'desc')
-               ->get();
+               ->paginate(10);
 
         foreach ($posts as $post){
          $this->authorize('posts_show_for_admin',$post);
@@ -243,7 +243,7 @@ class AdminController extends Controller
 
           if($count==true)
         {
-            return  count($posts);
+            return  $posts->total();
         }
                      
         return view('admin.approved_post',['posts'=>$posts]);
@@ -261,7 +261,7 @@ class AdminController extends Controller
                ->where('update_approved',0)
                ->where('post_pending',0)
                ->orderBy('updated_at', 'desc')
-               ->get();
+               ->paginate(10);
                
         foreach ($posts as $post){
          $this->authorize('posts_show_for_admin',$post);
@@ -269,7 +269,7 @@ class AdminController extends Controller
 
         if($count==true)
         {
-            return  count($posts);
+            return  $posts->total();
         }
         
         return view('admin.disapproved_post',['posts'=>$posts]);

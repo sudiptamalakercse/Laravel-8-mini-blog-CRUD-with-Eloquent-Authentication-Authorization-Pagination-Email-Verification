@@ -13,7 +13,7 @@ class Post_class
                ->where('update_approved',1)
                ->where('post_pending',0)
                ->orderBy('updated_at', 'desc')
-               ->paginate(3);
+               ->paginate(10);
 
         return view('home',['posts'=>$posts]);
    }
