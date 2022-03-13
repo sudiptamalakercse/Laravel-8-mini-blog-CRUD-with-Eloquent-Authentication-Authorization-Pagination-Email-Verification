@@ -46,7 +46,7 @@
 </div>
 
 <div class="mt-3 d-flex justify-content-center">
-       <span class="d-none d-sm-inline">{{$posts->links()}}</span>  
+       {{$posts->links()}}  
 </div>
   
        

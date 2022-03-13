@@ -17,8 +17,8 @@ class PostSeeder extends Seeder
                 for ($i=0; $i <20 ; $i++) { 
          
          $t_b=rand(1,10);
-         $a=rand(4,5);
-         $b=rand(3,4);
+         $a=rand(1,2);
+         $b=rand(1,2);
 
          Post::create([
          'title' => 'Title'.$t_b,
