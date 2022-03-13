@@ -41,7 +41,8 @@ class User
                ->where('update_approved',$update_approved)   
                ->where('post_pending',$post_pending)  
                ->get();
-
+    
+              
 
    foreach ($posts as $post) {
 
@@ -65,14 +66,25 @@ class User
 
       }
 
-        $posts=$user
+              $posts=$user
                ->posts()
                ->where('post_approved',$post_approved)
                ->where('update_approved',$update_approved)   
-               ->where('post_pending',$post_pending)       
+               ->where('post_pending',$post_pending)  
+               ->select($distinct_user.'_id')     
                ->distinct()
-               ->get([$distinct_user.'_id']); 
+               ->get();
+              
+              $unique_users_count=count($posts);
 
+              $posts=$user
+               ->posts()
+               ->where('post_approved',$post_approved)
+               ->where('update_approved',$update_approved)   
+               ->where('post_pending',$post_pending)  
+               ->select($distinct_user.'_id')     
+               ->distinct()
+               ->simplePaginate(2);
    
         if($post_approved==0 && $update_approved==0 && $post_pending==1 )
            {
@@ -94,10 +106,10 @@ class User
       
         if($count==true)
         {
-            return  count($posts);
+            return  $unique_users_count;
         }
 
-        return view($user_type.'.'.$blade_file,['posts'=>$posts]); 
+        return view($user_type.'.'.$blade_file,['posts'=>$posts,'unique_users_count'=>$unique_users_count]); 
  
     }
 

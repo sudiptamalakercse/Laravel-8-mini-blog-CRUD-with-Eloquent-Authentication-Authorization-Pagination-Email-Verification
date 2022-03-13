@@ -3,7 +3,8 @@
 ['title' => 'Some Title',
 'heading',
  'userTypeInfo',
- 'posts'
+ 'posts',
+ 'uniqueUsersCount'
  ]
  )
 
@@ -16,7 +17,7 @@
    <div class="container">
   <div class="row">
 <div class="col">
-<h3 class="mb-3 text-center mt-2 text-primary">{{$heading}}({{count($posts)}})</h3>
+<h3 class="mb-3 text-center mt-2 text-primary">{{$heading}}({{$uniqueUsersCount}})</h3>
 <div class="table-responsive-md">
 <table class="table">
   <thead class="thead-dark">
@@ -43,6 +44,12 @@
   </tbody>
 </table>
 </div>
+
+<div class="mt-3 d-flex justify-content-center">
+       <span class="d-none d-sm-inline">{{$posts->links()}}</span>  
+</div>
+  
+       
 </div>
 </div>
 </div> 
