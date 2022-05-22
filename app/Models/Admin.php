@@ -21,6 +21,7 @@ class Admin extends Authenticatable
         'name',
         'email',
         'password',
+        'is_email_verified'
     ];
 
     /**
@@ -44,6 +45,11 @@ class Admin extends Authenticatable
     public function posts()
     {
         return $this->hasMany(Post::class);
+    }
+
+    public function AdminVerify()
+    {
+        return $this->hasOne(AdminVerify::class);
     }
 
 }

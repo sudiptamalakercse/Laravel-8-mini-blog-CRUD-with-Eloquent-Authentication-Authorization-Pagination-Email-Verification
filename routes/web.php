@@ -48,7 +48,7 @@ Route::post('/login-blogger', [BloggerController::class, 'login_blogger']);
 
 
 
-Route::middleware(['auth:admin','disable_back_btn'])->group(function () {
+Route::middleware(['auth:admin','disable_back_btn','is_verify_admin_email'])->group(function () {
 
 
 Route::get('/dashboard-admin', [AdminController::class, 'dashboard_admin'])
@@ -176,6 +176,18 @@ Route::post('/posts/delete_selected_post', [DeleteController::class, 'delete_sel
 
 
 });
+
+
+//Custom admin email verification 
+Route::middleware(['auth:admin','disable_back_btn'])->group(function () {
+
+Route::get('admin/account/verify/{token}', [AdminController::class, 'verify_account'])->name('admin-verify');
+
+Route::get('admin/account/email/verification/notice', [AdminController::class, 'verify_account_notice'])->name('admin-verify-notice');
+
+Route::post('admin/account/email/resend', [AdminController::class, 'verify_account_email_resend'])->name('admin-verify-email-resend');
+
+}); 
  
                 
 Route::fallback(function () {
