@@ -46,5 +46,9 @@ class Blogger extends Authenticatable
     {
         return $this->hasMany(Post::class);
     }
+    public function BloggerVerify()
+    {
+        return $this->hasOne(BloggerVerify::class);
+    }
   
 }

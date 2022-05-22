@@ -8,6 +8,9 @@
   <div class="row">        
     <div class="col-md-4 offset-md-4">
          <h3 class="mb-3 text-center text-primary">Log In As Blogger</h3>
+@if (Session::has('message'))
+     <div class="alert alert-info" class="mb-3">{{ Session::get('message') }}</div>
+@endif
 @if ($errors->any())
     <div class="alert alert-danger" class="mt-5">
         <ul>

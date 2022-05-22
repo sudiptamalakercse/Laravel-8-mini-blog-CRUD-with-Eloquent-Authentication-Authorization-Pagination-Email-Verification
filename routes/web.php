@@ -44,8 +44,21 @@ Route::get('/login-blogger', [BloggerController::class, 'login_blogger_form'])
 Route::post('/login-blogger', [BloggerController::class, 'login_blogger']);
 
 
-});
+//Password Reset for Admin
+Route::get('admin/forgot_password',[AdminController::class, 'forgot_password'])
+->name('admin-password-request');
 
+Route::post('admin/forgot_password',[AdminController::class, 'forgot_password_handle'])
+->name('admin-password-email');
+
+Route::get('admin/reset_password/{token}/{email}',[AdminController::class, 'reset_password'])
+->name('admin-password-reset');
+
+Route::post('admin/reset_password_handle', [AdminController::class, 'reset_password_handle'])
+->name('admin-password-update');
+
+
+});
 
 
 Route::middleware(['auth:admin','disable_back_btn','is_verify_admin_email'])->group(function () {
@@ -99,9 +112,22 @@ Route::get('/update_pending_blogger', [AdminController::class, 'update_pending_b
 
 });
 
+//Custom admin email verification 
+Route::middleware(['auth:admin','disable_back_btn'])->group(function () {
+
+  
+Route::get('admin/account/verify/{token}', [AdminController::class, 'verify_account'])->name('admin-verify');
+
+Route::get('admin/account/email/verification/notice', [AdminController::class, 'verify_account_notice'])->name('admin-verify-notice');
+
+Route::post('admin/account/email/resend', [AdminController::class, 'verify_account_email_resend'])->name('admin-verify-email-resend');
 
 
-Route::middleware(['auth:blogger','disable_back_btn'])->group(function () {
+});
+
+
+
+Route::middleware(['auth:blogger','disable_back_btn','is_verify_blogger_email'])->group(function () {
 
 
 Route::get('/dashboard-blogger', [BloggerController::class, 'dashboard_blogger'])
@@ -162,8 +188,20 @@ Route::get('/update_pending_admin', [BloggerController::class, 'update_pending_a
 });
 
 
-Route::middleware('operations_for_admin_and_blogger')->group(function () {
+Route::middleware(['auth:blogger','disable_back_btn'])->group(function () {
 
+
+Route::get('blogger/account/verify/{token}', [BloggerController::class, 'verify_account'])->name('blogger-verify');
+
+Route::get('blogger/account/email/verification/notice', [BloggerController::class, 'verify_account_notice'])->name('blogger-verify-notice');
+
+Route::post('blogger/account/email/resend', [BloggerController::class, 'verify_account_email_resend'])->name('blogger-verify-email-resend');
+
+
+});
+
+
+Route::middleware('operations_for_admin_and_blogger')->group(function () {
 
 Route::post('/logout', [LogoutController::class, 'destroy'])
                 ->name('logout');
@@ -174,40 +212,8 @@ Route::get('/posts/delete/{post}', [DeleteController::class, 'delete_post'])
 Route::post('/posts/delete_selected_post', [DeleteController::class, 'delete_selected_post'])
                 ->name('posts.delete_selected_post');
 
-
 });
 
-
-//Custom admin email verification 
-Route::middleware(['auth:admin','disable_back_btn'])->group(function () {
-
-Route::get('admin/account/verify/{token}', [AdminController::class, 'verify_account'])->name('admin-verify');
-
-Route::get('admin/account/email/verification/notice', [AdminController::class, 'verify_account_notice'])->name('admin-verify-notice');
-
-Route::post('admin/account/email/resend', [AdminController::class, 'verify_account_email_resend'])->name('admin-verify-email-resend');
-
-}); 
-
-
-//Custom Password Reset
-Route::middleware(['guest:admin','guest:blogger','disable_back_btn'])->group(function () {
-
-//Password Reset for Admin
-Route::get('admin/forgot_password',[AdminController::class, 'forgot_password'])
-->name('admin-password-request');
-
-Route::post('admin/forgot_password',[AdminController::class, 'forgot_password_handle'])
-->name('admin-password-email');
-
-Route::get('admin/reset_password/{token}/{email}',[AdminController::class, 'reset_password'])
-->name('admin-password-reset');
-
-Route::post('admin/reset_password_handle', [AdminController::class, 'reset_password_handle'])
-->name('admin-password-update');
-
-});
- 
                 
 Route::fallback(function () {
   return redirect()->route('home');
