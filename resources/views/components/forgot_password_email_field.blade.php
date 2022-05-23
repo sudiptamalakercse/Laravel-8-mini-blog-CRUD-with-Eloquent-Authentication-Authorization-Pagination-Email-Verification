@@ -1,6 +1,7 @@
 @props(
 ['title' => 'Some Title',
 'heading',
+'email',
 'userType'
  ]
  )
@@ -25,14 +26,22 @@
         </ul>
     </div>
 @endif
+
 @if (Session::has('message'))
    <div class="alert alert-info" class="mb-3">{{ Session::get('message') }}</div>
+
+   @php 
+   if(Session::get('message')!=='We Do Not Find This Email!'){
+       $email=null;
+   }
+   @endphp 
+
 @endif
       <form action="{{route($userType.'-password-email')}}" method="post">
           @csrf
   <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">Enter Your Email address</label>
-    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email" value="{{ old('email') }}">
+    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email" value="@if(isset($email)){{$email}}@endif">
   </div>
   <button type="submit" class="btn btn-primary">Send</button>
 </form>

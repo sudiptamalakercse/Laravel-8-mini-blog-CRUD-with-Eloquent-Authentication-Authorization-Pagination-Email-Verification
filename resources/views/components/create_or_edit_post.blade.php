@@ -39,12 +39,12 @@
           @csrf
   <div class="mb-3">
     <label for="title" class="form-label">Title</label>
-    <input type="text" class="form-control" id="title" aria-describedby="emailHelp" name="title" value="{{ old('title') }}@if(isset($post)){{$post->title}}@endif">
+    <input type="text" class="form-control" id="title" aria-describedby="emailHelp" name="title" value="@if(isset($post)){{$post->title}}@else{{ old('title') }}@endif">
   </div>
   <div class="mb-3">
     <label for="body" class="form-label">Body</label>
     <div class="form-floating">
-      <textarea class="form-control" placeholder="Body" id="body" style="height: 200px;resize:none;" name="body">{{ old('body') }}@if(isset($post)){{$post->body}}@endif</textarea>
+      <textarea class="form-control" placeholder="Body" id="body" style="height: 200px;resize:none;" name="body">@if(isset($post)){{$post->body}}@else{{ old('body') }}@endif</textarea>
     </div>
   </div>
   <button type="submit" class="btn btn-primary rounded-pill">{{$actionButton}}</button>

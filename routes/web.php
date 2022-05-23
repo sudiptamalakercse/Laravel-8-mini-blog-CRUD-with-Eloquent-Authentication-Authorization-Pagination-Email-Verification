@@ -57,6 +57,18 @@ Route::get('admin/reset_password/{token}/{email}',[AdminController::class, 'rese
 Route::post('admin/reset_password_handle', [AdminController::class, 'reset_password_handle'])
 ->name('admin-password-update');
 
+//Password Reset for Blogger
+Route::get('blogger/forgot_password',[BloggerController::class, 'forgot_password'])
+->name('blogger-password-request');
+
+Route::post('blogger/forgot_password',[BloggerController::class, 'forgot_password_handle'])
+->name('blogger-password-email');
+
+Route::get('blogger/reset_password/{token}/{email}',[BloggerController::class, 'reset_password'])
+->name('blogger-password-reset');
+
+Route::post('blogger/reset_password_handle', [BloggerController::class, 'reset_password_handle'])
+->name('blogger-password-update');
 
 });
 

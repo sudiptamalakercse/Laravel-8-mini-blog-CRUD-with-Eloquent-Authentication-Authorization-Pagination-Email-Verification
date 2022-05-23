@@ -37,6 +37,9 @@
   </div>
   <button type="submit" class="btn-primary btn-sm rounded-pill">Log In</button>
 </form>
+<div class="mt-2">
+<a href="{{route('blogger-password-request')}}">Forget Password</a>
+</div>
     </div>
   </div>
 </div>

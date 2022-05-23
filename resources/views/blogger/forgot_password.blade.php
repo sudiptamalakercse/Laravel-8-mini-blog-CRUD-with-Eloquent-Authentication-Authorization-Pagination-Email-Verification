@@ -6,5 +6,5 @@ $email=old('email');
 title='Enter Your Email Address'
 heading='Enter Your Email Address'
 :email="$email"
-userType="admin"
+userType="blogger"
 />

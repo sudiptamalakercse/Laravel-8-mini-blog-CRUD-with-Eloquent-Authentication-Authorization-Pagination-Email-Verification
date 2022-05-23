@@ -503,7 +503,7 @@ class AdminController extends Controller
      $mess='We Do Not Find This Email!';
     }
 
-    return redirect()->back()->with('message', $mess); 
+    return redirect()->back()->with('message', $mess)->withInput();
 }//end
 
 public function reset_password($token,$email) {
