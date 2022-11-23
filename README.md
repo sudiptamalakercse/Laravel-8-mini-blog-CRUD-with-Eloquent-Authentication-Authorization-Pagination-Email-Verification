@@ -29,6 +29,7 @@ If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Lar
 
 ## Laravel Sponsors
 
+This is a web application where has two types of users who are blogger and admin. Blogger will write any blog which will be sent to Admin for approval. The task of approving the blogs will be divided to multi admins equeally.
 We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
 
 ### Premium Partners
